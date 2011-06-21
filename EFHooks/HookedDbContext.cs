@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 
@@ -19,38 +20,32 @@ namespace EFHooks
             PreHooks = hooks.OfType<IPreActionHook>().ToList();
         }
 
-        protected override System.Data.Entity.Validation.DbEntityValidationResult ValidateEntity(System.Data.Entity.Infrastructure.DbEntityEntry entityEntry, System.Collections.Generic.IDictionary<object, object> items)
+        public override int SaveChanges()
         {
-            var result = base.ValidateEntity(entityEntry, items);
-
-            if (_hooksEnabled && result.IsValid)
+            bool hasValidationErrors = this.ChangeTracker.Entries().Any(x => !x.GetValidationResult().IsValid);
+            if (!hasValidationErrors)
             {
-                foreach (var hook in PreHooks)
-                {
-                    var metadata = new HookEntityMetadata(entityEntry.State);
-                    hook.Hook(entityEntry.Entity, metadata);
+                var modifiedEntries =
+                    this.ChangeTracker.Entries()
+                                      .Where(x => x.State != EntityState.Unchanged && x.State != EntityState.Detached)
+                                      .ToArray();
 
-                    if (metadata.HasStateChanged)
+                foreach (var entityEntry in modifiedEntries)
+                {
+                    foreach (var hook in PreHooks)
                     {
-                        entityEntry.State = metadata.State;
+                        var metadata = new HookEntityMetadata(entityEntry.State);
+                        hook.Hook(entityEntry.Entity, metadata);
+
+                        if (metadata.HasStateChanged)
+                        {
+                            entityEntry.State = metadata.State;
+                        }
                     }
                 }
             }
 
-            return result;
-        }
-
-        public override int SaveChanges()
-        {
-            try
-            {
-                _hooksEnabled = true;
-                return base.SaveChanges();
-            }
-            finally
-            {
-                _hooksEnabled = false;
-            }
+            return base.SaveChanges();
         }
     }
 }

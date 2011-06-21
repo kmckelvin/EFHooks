@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using EFHooks.Tests.Hooks;
 using NUnit.Framework;
 
@@ -111,6 +112,22 @@ namespace EFHooks.Tests
             context.SaveChanges();
 
             Assert.AreEqual(entity.CreatedAt.Date, DateTime.Today);
+        }
+
+        [Test]
+        public void HookedDbContext_ShouldNotHook_IfAnyChangedObjectsAreInvalid()
+        {
+            var context = new LocalContext();
+            context.RegisterHook(new TimestampPreInsertHook());
+            var tsEntity = new TimestampedSoftDeletedEntity();
+            var valEntity = new ValidatedEntity();
+
+            context.Entities.Add(tsEntity);
+            context.ValidatedEntities.Add(valEntity);
+
+            Assert.Throws<DbEntityValidationException>(() => context.SaveChanges());
+
+            Assert.AreNotEqual(tsEntity.CreatedAt.Date, DateTime.Today);
         }
     }
 }

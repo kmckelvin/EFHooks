@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace EFHooks.Tests.Hooks
 {
@@ -15,5 +16,16 @@ namespace EFHooks.Tests.Hooks
         public DateTime CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
         public bool IsDeleted { get; set; }
+    }
+
+    public class ValidatedEntity : ITimeStamped
+    {
+        public int Id { get; set; }
+
+        [Required]
+        public string Text { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+        public DateTime? ModifiedAt { get; set; }
     }
 }

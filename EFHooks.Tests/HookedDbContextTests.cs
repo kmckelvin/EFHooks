@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using EFHooks.Tests.Hooks;
 using NUnit.Framework;
@@ -24,6 +25,7 @@ namespace EFHooks.Tests
             }
 
             public DbSet<TimestampedSoftDeletedEntity> Entities { get; set; }
+            public DbSet<ValidatedEntity> ValidatedEntities { get; set; }
         }
 
         [Test]
@@ -67,6 +69,25 @@ namespace EFHooks.Tests
             context.SaveChanges();
 
             Assert.AreEqual(entity.CreatedAt.Date, DateTime.Today);
+        }
+
+        [Test]
+        public void HookedDbContext_MustNotCallHooks_IfModelIsInvalid()
+        {
+            var hooks = new IHook[]
+                            {
+                                new TimestampPreInsertHook()
+                            };
+
+            var context = new LocalContext(hooks);
+            var validatedEntity = new ValidatedEntity();
+            context.ValidatedEntities.Add(validatedEntity);
+
+            try
+            { context.SaveChanges(); }
+            catch { }
+
+            Assert.AreNotEqual(validatedEntity.CreatedAt.Date, DateTime.Today);
         }
     }
 }

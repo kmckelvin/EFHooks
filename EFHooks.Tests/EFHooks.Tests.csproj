@@ -58,6 +58,9 @@
     <Compile Include="Hooks\HookEntityMetadataTests.cs" />
     <Compile Include="Hooks\ISoftDeleted.cs" />
     <Compile Include="Hooks\ITimeStamped.cs" />
+    <Compile Include="Hooks\PostDeleteHookTests.cs" />
+    <Compile Include="Hooks\PostInsertHookTests.cs" />
+    <Compile Include="Hooks\PostUpdateHookTests.cs" />
     <Compile Include="Hooks\PreDeleteHookTests.cs" />
     <Compile Include="Hooks\PreInsertHookTests.cs" />
     <Compile Include="Hooks\PreUpdateHookTests.cs" />

@@ -48,7 +48,12 @@
     <Compile Include="HookedDbContext.cs" />
     <Compile Include="HookEntityMetadata.cs" />
     <Compile Include="IHook.cs" />
+    <Compile Include="IPostActionHook.cs" />
     <Compile Include="IPreActionHook.cs" />
+    <Compile Include="PostActionHook.cs" />
+    <Compile Include="PostDeleteHook.cs" />
+    <Compile Include="PostInsertHook.cs" />
+    <Compile Include="PostUpdateHook.cs" />
     <Compile Include="PreActionHook.cs" />
     <Compile Include="PreDeleteHook.cs" />
     <Compile Include="PreInsertHook.cs" />

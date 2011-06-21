@@ -10,7 +10,10 @@ namespace EFHooks
 
         public void Hook(object entity, HookEntityMetadata metadata)
         {
-            this.Hook((TEntity)entity, metadata);
+            if (typeof(TEntity).IsAssignableFrom(entity.GetType()))
+            {
+                this.Hook((TEntity)entity, metadata);
+            }
         }
     }
 }

@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HookedDbContextTests.cs" />
     <Compile Include="Hooks\HookEntityMetadataTests.cs" />
     <Compile Include="Hooks\ISoftDeleted.cs" />
     <Compile Include="Hooks\ITimeStamped.cs" />

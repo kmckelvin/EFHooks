@@ -18,8 +18,7 @@ namespace EFHooks
         {
             var result = base.ValidateEntity(entityEntry, items);
 
-            //todo - only hook if it has passed validation
-            if (_hooksEnabled)
+            if (_hooksEnabled && result.IsValid)
             {
                 foreach (var hook in _preHooks)
                 {

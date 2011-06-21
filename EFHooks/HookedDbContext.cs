@@ -8,7 +8,6 @@ namespace EFHooks
     public class HookedDbContext : DbContext
     {
         protected IList<IPreActionHook> PreHooks;
-        private bool _hooksEnabled = false;
 
         public HookedDbContext()
         {

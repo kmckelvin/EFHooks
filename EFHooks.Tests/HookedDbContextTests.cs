@@ -19,6 +19,11 @@ namespace EFHooks.Tests
 
         private class LocalContext : HookedDbContext
         {
+            public LocalContext() : base()
+            {
+                
+            }
+
             public LocalContext(IEnumerable<IHook> hooks) : base(hooks)
             {
                 
@@ -26,6 +31,11 @@ namespace EFHooks.Tests
 
             public DbSet<TimestampedSoftDeletedEntity> Entities { get; set; }
             public DbSet<ValidatedEntity> ValidatedEntities { get; set; }
+
+            public void RegisterHook(IPreActionHook hook)
+            {
+                this.PreHooks.Add(hook);
+            }
         }
 
         [Test]
@@ -88,6 +98,19 @@ namespace EFHooks.Tests
             catch { }
 
             Assert.AreNotEqual(validatedEntity.CreatedAt.Date, DateTime.Today);
+        }
+
+        [Test]
+        public void HookedDbContext_AfterConstruction_CanRegisterNewHooks()
+        {
+            var context = new LocalContext();
+            context.RegisterHook(new TimestampPreInsertHook());
+
+            var entity = new TimestampedSoftDeletedEntity();
+            context.Entities.Add(entity);
+            context.SaveChanges();
+
+            Assert.AreEqual(entity.CreatedAt.Date, DateTime.Today);
         }
     }
 }

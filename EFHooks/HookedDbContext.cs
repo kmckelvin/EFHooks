@@ -6,12 +6,17 @@ namespace EFHooks
 {
     public class HookedDbContext : DbContext
     {
-        private IPreActionHook[] _preHooks;
+        protected IList<IPreActionHook> PreHooks;
         private bool _hooksEnabled = false;
+
+        public HookedDbContext()
+        {
+            PreHooks = new List<IPreActionHook>();
+        }
 
         public HookedDbContext(IEnumerable<IHook> hooks)
         {
-            _preHooks = hooks.OfType<IPreActionHook>().ToArray();
+            PreHooks = hooks.OfType<IPreActionHook>().ToList();
         }
 
         protected override System.Data.Entity.Validation.DbEntityValidationResult ValidateEntity(System.Data.Entity.Infrastructure.DbEntityEntry entityEntry, System.Collections.Generic.IDictionary<object, object> items)
@@ -20,7 +25,7 @@ namespace EFHooks
 
             if (_hooksEnabled && result.IsValid)
             {
-                foreach (var hook in _preHooks)
+                foreach (var hook in PreHooks)
                 {
                     var metadata = new HookEntityMetadata(entityEntry.State);
                     hook.Hook(entityEntry.Entity, metadata);

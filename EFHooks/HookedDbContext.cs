@@ -6,11 +6,12 @@ namespace EFHooks
 {
     public class HookedDbContext : DbContext
     {
-        private List<IPreActionHook> _preHooks;
+        private IPreActionHook[] _preHooks;
+        private bool _hooksEnabled = false;
 
         public HookedDbContext(IEnumerable<IHook> hooks)
         {
-            _preHooks = hooks.OfType<IPreActionHook>().ToList();
+            _preHooks = hooks.OfType<IPreActionHook>().ToArray();
         }
 
         protected override System.Data.Entity.Validation.DbEntityValidationResult ValidateEntity(System.Data.Entity.Infrastructure.DbEntityEntry entityEntry, System.Collections.Generic.IDictionary<object, object> items)
@@ -18,19 +19,34 @@ namespace EFHooks
             var result = base.ValidateEntity(entityEntry, items);
 
             //todo - only hook if it has passed validation
-
-            foreach (var hook in _preHooks)
+            if (_hooksEnabled)
             {
-                var metadata = new HookEntityMetadata(entityEntry.State);
-                hook.Hook(entityEntry.Entity, metadata);
-
-                if (metadata.HasStateChanged)
+                foreach (var hook in _preHooks)
                 {
-                    entityEntry.State = metadata.State;
+                    var metadata = new HookEntityMetadata(entityEntry.State);
+                    hook.Hook(entityEntry.Entity, metadata);
+
+                    if (metadata.HasStateChanged)
+                    {
+                        entityEntry.State = metadata.State;
+                    }
                 }
             }
 
             return result;
+        }
+
+        public override int SaveChanges()
+        {
+            try
+            {
+                _hooksEnabled = true;
+                return base.SaveChanges();
+            }
+            finally
+            {
+                _hooksEnabled = false;
+            }
         }
     }
 }

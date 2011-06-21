@@ -34,11 +34,6 @@ namespace EFHooks.Tests
 
             public DbSet<TimestampedSoftDeletedEntity> Entities { get; set; }
             public DbSet<ValidatedEntity> ValidatedEntities { get; set; }
-
-            public void RegisterHook(IPreActionHook hook)
-            {
-                this.PreHooks.Add(hook);
-            }
         }
 
         [Test]

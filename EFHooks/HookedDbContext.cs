@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace EFHooks
 {
-    public class HookedDbContext : DbContext
+    public abstract class HookedDbContext : DbContext
     {
         protected IList<IPreActionHook> PreHooks;
 
@@ -17,6 +17,11 @@ namespace EFHooks
         public HookedDbContext(IEnumerable<IHook> hooks)
         {
             PreHooks = hooks.OfType<IPreActionHook>().ToList();
+        }
+
+        public void RegisterHook(IPreActionHook hook)
+        {
+            this.PreHooks.Add(hook);
         }
 
         public override int SaveChanges()

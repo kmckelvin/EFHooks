@@ -21,7 +21,8 @@ namespace EFHooks
 
         public override int SaveChanges()
         {
-            bool hasValidationErrors = this.ChangeTracker.Entries().Any(x => !x.GetValidationResult().IsValid);
+            bool hasValidationErrors = this.Configuration.ValidateOnSaveEnabled && this.ChangeTracker.Entries().Any(x => !x.GetValidationResult().IsValid);
+
             if (!hasValidationErrors)
             {
                 var modifiedEntries =

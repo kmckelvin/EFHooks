@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using System.Linq;
 using EFHooks.Tests.Hooks;
 using NUnit.Framework;
 
@@ -128,6 +130,26 @@ namespace EFHooks.Tests
             Assert.Throws<DbEntityValidationException>(() => context.SaveChanges());
 
             Assert.AreNotEqual(tsEntity.CreatedAt.Date, DateTime.Today);
+        }
+
+        [Test]
+        public void HookedDbContext_ShouldHook_IfValidateBeforeSaveIsDisabled_AndChangedObjectsAreInvalid()
+        {
+            var context = new LocalContext();
+            context.Configuration.ValidateOnSaveEnabled = false;
+            context.RegisterHook(new TimestampPreInsertHook());
+            var tsEntity = new TimestampedSoftDeletedEntity();
+            var valEntity = new ValidatedEntity();
+
+            context.Entities.Add(tsEntity);
+            context.ValidatedEntities.Add(valEntity);
+
+            Assert.IsTrue(context.GetValidationErrors().Any(x => !x.IsValid));
+
+            Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+
+            Assert.AreEqual(tsEntity.CreatedAt.Date, DateTime.Today);
+            Assert.AreEqual(valEntity.CreatedAt.Date, DateTime.Today);
         }
     }
 }

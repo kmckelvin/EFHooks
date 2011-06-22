@@ -5,7 +5,7 @@ namespace EFHooks
     /// <summary>
     /// A strongly typed PreActionHook.
     /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
+    /// <typeparam name="TEntity">The type of entity this hook must watch for.</typeparam>
     public abstract class PreActionHook<TEntity> : IPreActionHook
     {
         /// <summary>
@@ -17,8 +17,8 @@ namespace EFHooks
         /// The logic to perform per entity before the registered action gets performed.
         /// This gets run once per entity that has been changed.
         /// </summary>
-        /// <param name="entity"></param>
-        /// <param name="metadata"></param>
+        /// <param name="entity">The entity that is processed by Entity Framework.</param>
+        /// <param name="metadata">Metadata about the entity in the context of this hook - such as state.</param>
         public abstract void Hook(TEntity entity, HookEntityMetadata metadata);
 
         /// <summary>

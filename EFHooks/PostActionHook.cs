@@ -5,6 +5,7 @@ namespace EFHooks
     /// <summary>
     /// Implements a strongly-typed hook to be run after an action is performed in the database.
     /// </summary>
+    /// <typeparam name="TEntity">The type of entity this hook must watch for.</typeparam>
     public abstract class PostActionHook<TEntity> : IPostActionHook
     {
         /// <summary>

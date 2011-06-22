@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HookedDbContext.cs" />
+    <Compile Include="HookedEntityEntry.cs" />
     <Compile Include="HookEntityMetadata.cs" />
     <Compile Include="IHook.cs" />
     <Compile Include="IPostActionHook.cs" />

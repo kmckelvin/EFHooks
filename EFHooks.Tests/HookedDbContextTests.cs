@@ -21,6 +21,14 @@ namespace EFHooks.Tests
             }
         }
 
+        private class TimestampPreUpdateHook : PreUpdateHook<ITimeStamped>
+        {
+            public override void Hook(ITimeStamped entity, HookEntityMetadata metadata)
+            {
+                entity.ModifiedAt = DateTime.Now;
+            }
+        }
+
         private class TimestampPostInsertHook : PostInsertHook<ITimeStamped>
         {
             public override void Hook(ITimeStamped entity, HookEntityMetadata metadata)
@@ -221,6 +229,22 @@ namespace EFHooks.Tests
             context.SaveChanges();
 
             Assert.AreEqual(DateTime.Today, tsEntity.ModifiedAt.Value.Date);
+        }
+
+        [Test]
+        public void HookedDbContext_MustOnlyHookWhenObjectIsInTheSameState()
+        {
+            var context = new LocalContext();
+            context.RegisterHook(new TimestampPreUpdateHook());
+            context.RegisterHook(new TimestampPreUpdateHook());
+
+            var tsEntity = new TimestampedSoftDeletedEntity();
+            tsEntity.CreatedAt = DateTime.Now;
+            context.Entities.Add(tsEntity);
+            context.SaveChanges();
+
+            Assert.AreEqual(DateTime.Today, tsEntity.CreatedAt.Date);
+            Assert.IsFalse(tsEntity.ModifiedAt.HasValue);
         }
     }
 }

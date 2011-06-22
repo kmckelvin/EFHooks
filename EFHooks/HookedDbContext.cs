@@ -50,23 +50,28 @@ namespace EFHooks
             bool hasPostHooks = this.PostHooks.Any(); // save this to a local variable since we're checking this again later.
 
             var modifiedEntries = hasValidationErrors && !hasPostHooks
-                                      ? new DbEntityEntry[0]
+                                      ? new HookedEntityEntry[0]
                                       : this.ChangeTracker.Entries()
                                             .Where(x => x.State != EntityState.Unchanged && x.State != EntityState.Detached)
+                                            .Select(x => new HookedEntityEntry()
+                                                             {
+                                                                 Entity = x.Entity,
+                                                                 PreSaveState = x.State
+                                                             })
                                             .ToArray();
 
             if (!hasValidationErrors)
             {
                 foreach (var entityEntry in modifiedEntries)
                 {
-                    foreach (var hook in PreHooks)
+                    foreach (var hook in PreHooks.Where(x => x.HookStates == entityEntry.PreSaveState))
                     {
-                        var metadata = new HookEntityMetadata(entityEntry.State);
+                        var metadata = new HookEntityMetadata(entityEntry.PreSaveState);
                         hook.HookObject(entityEntry.Entity, metadata);
 
                         if (metadata.HasStateChanged)
                         {
-                            entityEntry.State = metadata.State;
+                            entityEntry.PreSaveState = metadata.State;
                         }
                     }
                 }
@@ -78,9 +83,9 @@ namespace EFHooks
             {
                 foreach (var entityEntry in modifiedEntries)
                 {
-                    foreach (var hook in PostHooks)
+                    foreach (var hook in PostHooks.Where(x => x.HookStates == entityEntry.PreSaveState))
                     {
-                        var metadata = new HookEntityMetadata(entityEntry.State);
+                        var metadata = new HookEntityMetadata(entityEntry.PreSaveState);
                         hook.HookObject(entityEntry.Entity, metadata);
                     }
                 }

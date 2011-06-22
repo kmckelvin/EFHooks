@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using EFHooks.Tests.Hooks;
 using NUnit.Framework;
@@ -20,6 +21,23 @@ namespace EFHooks.Tests
             }
         }
 
+        private class TimestampPostInsertHook : PostInsertHook<ITimeStamped>
+        {
+            public override void Hook(ITimeStamped entity, HookEntityMetadata metadata)
+            {
+                entity.ModifiedAt = DateTime.Now;
+            }
+        }
+
+        private class RunCheckedPreInsertHook : PreInsertHook<object>
+        {
+            public bool HasRun { get; set; }
+            public override void Hook(object entity, HookEntityMetadata metadata)
+            {
+                HasRun = true;
+            }
+        }
+
         private class LocalContext : HookedDbContext
         {
             public LocalContext() : base()
@@ -27,7 +45,7 @@ namespace EFHooks.Tests
                 
             }
 
-            public LocalContext(IEnumerable<IHook> hooks) : base(hooks)
+            public LocalContext(IHook[] hooks) : base(hooks)
             {
                 
             }
@@ -145,6 +163,50 @@ namespace EFHooks.Tests
 
             Assert.AreEqual(tsEntity.CreatedAt.Date, DateTime.Today);
             Assert.AreEqual(valEntity.CreatedAt.Date, DateTime.Today);
+        }
+
+        [Test]
+        public void HookedDbContext_ShouldPostHook_IfNoExceptionIsHit()
+        {
+            var runCheckingHook = new RunCheckedPreInsertHook();
+            var hooks = new IHook[]
+                            {
+                                runCheckingHook,
+                                new TimestampPostInsertHook()
+                            };
+
+
+            var context = new LocalContext(hooks);
+
+            var tsEntity = new TimestampedSoftDeletedEntity();
+            tsEntity.CreatedAt = DateTime.Now;
+            context.Entities.Add(tsEntity);
+            context.SaveChanges();
+
+            Assert.IsTrue(runCheckingHook.HasRun);
+            Assert.AreEqual(DateTime.Today, tsEntity.ModifiedAt.Value.Date);
+        }
+
+        [Test]
+        public void HookedDbContext_ShouldNotPostHook_IfExceptionIsHit()
+        {
+            var runCheckingHook = new RunCheckedPreInsertHook();
+            var hooks = new IHook[]
+                            {
+                                runCheckingHook,
+                                new TimestampPostInsertHook()
+                            };
+
+            var context = new LocalContext(hooks);
+
+            var valEntity = new ValidatedEntity();
+            valEntity.CreatedAt = DateTime.Now;
+            context.ValidatedEntities.Add(valEntity);
+
+            Assert.Throws<DbEntityValidationException>(() => context.SaveChanges());
+
+            Assert.IsFalse(runCheckingHook.HasRun);
+            Assert.IsFalse(valEntity.ModifiedAt.HasValue);
         }
     }
 }

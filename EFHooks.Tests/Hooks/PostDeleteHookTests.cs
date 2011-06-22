@@ -26,7 +26,7 @@ namespace EFHooks.Tests.Hooks
         {
             var hook = new TimestampPostDeleteHook();
             var entity = new TimestampedSoftDeletedEntity();
-            ((IHook)hook).Hook(entity, null);
+            ((IHook)hook).HookObject(entity, null);
 
             Assert.AreEqual(entity.ModifiedAt.Value.Date, DateTime.Today);
         }

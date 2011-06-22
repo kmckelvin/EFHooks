@@ -27,7 +27,7 @@ namespace EFHooks.Tests.Hooks
             var hook = new TimestampPostInsertHook();
             var entity = new TimestampedSoftDeletedEntity();
 
-            ((IHook)hook).Hook(entity, null);
+            ((IHook)hook).HookObject(entity, null);
             Assert.AreEqual(DateTime.Today, entity.CreatedAt.Date);
         }
     }

@@ -2,6 +2,6 @@
 {
     public interface IHook
     {
-        void Hook(object entity, HookEntityMetadata metadata);
+        void HookObject(object entity, HookEntityMetadata metadata);
     }
 }

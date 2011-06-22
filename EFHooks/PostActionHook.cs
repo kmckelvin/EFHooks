@@ -4,7 +4,7 @@ namespace EFHooks
 {
     public abstract class PostActionHook<TEntity> : IPostActionHook
     {
-        public void Hook(object entity, HookEntityMetadata metadata)
+        public void HookObject(object entity, HookEntityMetadata metadata)
         {
             if (typeof(TEntity).IsAssignableFrom(entity.GetType()))
             {

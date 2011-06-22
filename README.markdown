@@ -18,7 +18,7 @@ The example below will automatically set the `CreatedAt` property to `DateTime.N
 
 Then derive your DbContext from the EFHooks.HookedDbContext and register the hooks.
 
-    private class AppContext : HookedDbContext
+    public class AppContext : HookedDbContext
     {
         public AppContext() : base()
         {

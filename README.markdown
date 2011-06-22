@@ -4,9 +4,7 @@ EFHooks is designed to lend itself to code that is easy to unit test with the le
 
 Getting Started:
 
-Currently only pre-action hooks are implemented.
-
-Define a hook by deriving from one of the strongly typed hook classes: `PreInsertHook<TEntity>`, `PreUpdateHook<TEntity>` or `PreDeleteHook<TEntity>` and override the `Hook` method.
+Define a hook to fire before an action by deriving from one of the strongly typed hook classes: `PreInsertHook<TEntity>`, `PreUpdateHook<TEntity>` or `PreDeleteHook<TEntity>` and override the `Hook` method. (There are also Post-Action hooks)
 
 The example below will automatically set the `CreatedAt` property to `DateTime.Now`
 

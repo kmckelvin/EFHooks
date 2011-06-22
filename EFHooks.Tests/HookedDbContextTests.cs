@@ -208,5 +208,19 @@ namespace EFHooks.Tests
             Assert.IsFalse(runCheckingHook.HasRun);
             Assert.IsFalse(valEntity.ModifiedAt.HasValue);
         }
+
+        [Test]
+        public void HookedDbContext_CanLateBindPostActionHooks()
+        {
+            var context = new LocalContext();
+            context.RegisterHook(new TimestampPostInsertHook());
+
+            var tsEntity = new TimestampedSoftDeletedEntity();
+            tsEntity.CreatedAt = DateTime.Now;
+            context.Entities.Add(tsEntity);
+            context.SaveChanges();
+
+            Assert.AreEqual(DateTime.Today, tsEntity.ModifiedAt.Value.Date);
+        }
     }
 }

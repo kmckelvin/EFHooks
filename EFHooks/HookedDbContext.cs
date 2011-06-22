@@ -28,6 +28,11 @@ namespace EFHooks
             this.PreHooks.Add(hook);
         }
 
+        public void RegisterHook(IPostActionHook hook)
+        {
+            this.PostHooks.Add(hook);
+        }
+
         public override int SaveChanges()
         {
             bool hasValidationErrors = this.Configuration.ValidateOnSaveEnabled && this.ChangeTracker.Entries().Any(x => !x.GetValidationResult().IsValid);

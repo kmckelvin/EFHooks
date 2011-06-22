@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace EFHooks
 {
+    /// <summary>
+    /// An Entity Framework DbContext that can be hooked into by registering EFHooks.IHook objects.
+    /// </summary>
     public abstract class HookedDbContext : DbContext
     {
         protected IList<IPreActionHook> PreHooks;
@@ -23,11 +26,19 @@ namespace EFHooks
             PostHooks = hooks.OfType<IPostActionHook>().ToList();
         }
 
+        /// <summary>
+        /// Registers a hook to run before a database action occurs.
+        /// </summary>
+        /// <param name="hook">The hook to register.</param>
         public void RegisterHook(IPreActionHook hook)
         {
             this.PreHooks.Add(hook);
         }
 
+        /// <summary>
+        /// Registers a hook to run after a database action occurs.
+        /// </summary>
+        /// <param name="hook">The hook to register.</param>
         public void RegisterHook(IPostActionHook hook)
         {
             this.PostHooks.Add(hook);

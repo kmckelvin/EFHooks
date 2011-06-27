@@ -235,7 +235,7 @@ namespace EFHooks.Tests
         public void HookedDbContext_MustOnlyHookWhenObjectIsInTheSameState()
         {
             var context = new LocalContext();
-            context.RegisterHook(new TimestampPreUpdateHook());
+            context.RegisterHook(new TimestampPreInsertHook());
             context.RegisterHook(new TimestampPreUpdateHook());
 
             var tsEntity = new TimestampedSoftDeletedEntity();

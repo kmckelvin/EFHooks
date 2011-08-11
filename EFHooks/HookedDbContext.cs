@@ -26,6 +26,20 @@ namespace EFHooks
             PostHooks = hooks.OfType<IPostActionHook>().ToList();
         }
 
+        public HookedDbContext(string nameOrConnectionString)
+            : base(nameOrConnectionString)
+        {
+            PreHooks = new List<IPreActionHook>();
+            PostHooks = new List<IPostActionHook>();
+        }
+
+        public HookedDbContext(IHook[] hooks, string nameOrConnectionString)
+            : base(nameOrConnectionString)
+        {
+            PreHooks = hooks.OfType<IPreActionHook>().ToList();
+            PostHooks = hooks.OfType<IPostActionHook>().ToList();
+        }
+
         /// <summary>
         /// Registers a hook to run before a database action occurs.
         /// </summary>

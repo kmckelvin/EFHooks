@@ -62,6 +62,24 @@ namespace EFHooks.Tests
             public DbSet<ValidatedEntity> ValidatedEntities { get; set; }
         }
 
+        private class LocalContextWithNameOrConnectionString : HookedDbContext
+        {
+            public LocalContextWithNameOrConnectionString()
+                : base("EFHooksDatabase")
+            {
+
+            }
+
+            public LocalContextWithNameOrConnectionString(IHook[] hooks)
+                : base(hooks, "EFHooksDatabase")
+            {
+
+            }
+
+            public DbSet<TimestampedSoftDeletedEntity> Entities { get; set; }
+            public DbSet<ValidatedEntity> ValidatedEntities { get; set; }
+        }
+
         [Test]
         public void HookedDbContext_ConstructsWithHooks()
         {
@@ -245,6 +263,13 @@ namespace EFHooks.Tests
 
             Assert.AreEqual(DateTime.Today, tsEntity.CreatedAt.Date);
             Assert.IsFalse(tsEntity.ModifiedAt.HasValue);
+        }
+
+        [Test]
+        public void HookedDbContext_NameOrConnectionString()
+        {
+            var context = new LocalContextWithNameOrConnectionString();
+            Assert.That(context.Database.Connection.Database, Is.EqualTo("EFHooksDatabase"));
         }
     }
 }

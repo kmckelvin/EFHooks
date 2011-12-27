@@ -4,9 +4,10 @@ namespace EFHooks
 {
     public class HookEntityMetadata
     {
-        public HookEntityMetadata(EntityState state)
+        public HookEntityMetadata(EntityState state, HookedDbContext context = null)
         {
             _state = state;
+            CurrentContext = context;
         }
 
         private EntityState _state;
@@ -24,5 +25,7 @@ namespace EFHooks
         }
 
         public bool HasStateChanged { get; private set; }
+
+        public HookedDbContext CurrentContext { get; private set; }
     }
 }

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Linq;
 using EFHooks.Tests.Hooks;
+using FakeItEasy;
 using NUnit.Framework;
 
 namespace EFHooks.Tests
@@ -270,6 +272,38 @@ namespace EFHooks.Tests
         {
             var context = new LocalContextWithNameOrConnectionString();
             Assert.That(context.Database.Connection.Database, Is.EqualTo("EFHooksDatabase"));
+        }
+
+        [Test]
+        public void HookedDbContext_PreActionHookMethod_MustHaveTheContextPassedInTheMetadata()
+        {
+            var context = new LocalContext();
+            var preAction = A.Fake<PreInsertHook<ITimeStamped>>();
+            A.CallTo(() => preAction.HookStates).Returns(EntityState.Added);
+            
+            context.RegisterHook(preAction);
+
+            // We aren't testing the hook here so just set the createdat date so that SaveChanges passes
+            var entity = new TimestampedSoftDeletedEntity { CreatedAt = DateTime.Now };
+            context.Entities.Add(entity);
+            context.SaveChanges();
+            A.CallTo(() => preAction.Hook(entity, A<HookEntityMetadata>.That.Matches(m => m.CurrentContext == context))).MustHaveHappened();
+        }
+
+        [Test]
+        public void HookedDbContext_PostActionHookMethod_MustHaveTheContextPassedInTheMetadata()
+        {
+            var context = new LocalContext();
+            var postAction = A.Fake<PostInsertHook<ITimeStamped>>();
+            A.CallTo(() => postAction.HookStates).Returns(EntityState.Added);
+
+            context.RegisterHook(postAction);
+
+            // We aren't testing the hook here
+            var entity = new TimestampedSoftDeletedEntity { CreatedAt = DateTime.Now };
+            context.Entities.Add(entity);
+            context.SaveChanges();
+            A.CallTo(() => postAction.Hook(entity, A<HookEntityMetadata>.That.Matches(m => m.CurrentContext == context))).MustHaveHappened();
         }
     }
 }

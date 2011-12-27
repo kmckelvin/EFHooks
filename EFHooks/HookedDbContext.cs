@@ -80,7 +80,7 @@ namespace EFHooks
                 {
                     foreach (var hook in PreHooks.Where(x => x.HookStates == entityEntry.PreSaveState))
                     {
-                        var metadata = new HookEntityMetadata(entityEntry.PreSaveState);
+                        var metadata = new HookEntityMetadata(entityEntry.PreSaveState, this);
                         hook.HookObject(entityEntry.Entity, metadata);
 
                         if (metadata.HasStateChanged)
@@ -99,7 +99,7 @@ namespace EFHooks
                 {
                     foreach (var hook in PostHooks.Where(x => x.HookStates == entityEntry.PreSaveState))
                     {
-                        var metadata = new HookEntityMetadata(entityEntry.PreSaveState);
+                        var metadata = new HookEntityMetadata(entityEntry.PreSaveState, this);
                         hook.HookObject(entityEntry.Entity, metadata);
                     }
                 }

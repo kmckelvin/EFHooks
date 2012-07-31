@@ -60,7 +60,7 @@ namespace EFHooks
 
         public override int SaveChanges()
         {
-            bool hasValidationErrors = this.Configuration.ValidateOnSaveEnabled && this.ChangeTracker.Entries().Any(x => !x.GetValidationResult().IsValid);
+            bool hasValidationErrors = this.Configuration.ValidateOnSaveEnabled && this.ChangeTracker.Entries().Any(x => x.State != EntityState.Unchanged && !x.GetValidationResult().IsValid);
             bool hasPostHooks = this.PostHooks.Any(); // save this to a local variable since we're checking this again later.
 
             var modifiedEntries = hasValidationErrors && !hasPostHooks

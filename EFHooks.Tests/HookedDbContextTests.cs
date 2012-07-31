@@ -145,6 +145,23 @@ namespace EFHooks.Tests
         }
 
         [Test]
+        public void HookedDbContext_MustCallHooks_IfModelIsInvalidButUnchanged()
+        {
+
+            var context = new LocalContext();
+            context.RegisterHook(new TimestampPreInsertHook());
+            var tsEntity = new TimestampedSoftDeletedEntity();
+            var valEntity = new ValidatedEntity();
+
+            context.Entities.Add(tsEntity);
+            context.Entry(valEntity).State = EntityState.Unchanged;
+
+            Assert.DoesNotThrow(() => context.SaveChanges());
+
+            Assert.AreEqual(tsEntity.CreatedAt.Date, DateTime.Today);
+        }
+
+        [Test]
         public void HookedDbContext_AfterConstruction_CanRegisterNewHooks()
         {
             var context = new LocalContext();

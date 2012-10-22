@@ -1,5 +1,4 @@
-﻿
-using System.Data;
+﻿using System.Data;
 using NUnit.Framework;
 
 namespace EFHooks.Tests.Hooks

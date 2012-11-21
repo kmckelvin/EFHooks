@@ -8,6 +8,11 @@ namespace EFHooks.Tests.Hooks
     {
         private class TimestampPreInsertHook : PreInsertHook<ITimeStamped>
         {
+			public override bool RequiresValidation
+			{
+				get { return false; }
+			}
+
             public override void Hook(ITimeStamped entity, HookEntityMetadata metadata)
             {
                 entity.CreatedAt = DateTime.Now;

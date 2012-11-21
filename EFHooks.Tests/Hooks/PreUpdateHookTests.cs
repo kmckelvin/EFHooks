@@ -8,6 +8,11 @@ namespace EFHooks.Tests.Hooks
     {
         private class TimestampPreUpdateHook : PreUpdateHook<ITimeStamped>
         {
+			public override bool RequiresValidation
+			{
+				get { return false; }
+			}
+
             public override void Hook(ITimeStamped entity, HookEntityMetadata metadata)
             {
                 entity.ModifiedAt = DateTime.Now;

@@ -7,6 +7,9 @@ namespace EFHooks
     /// </summary>
     public abstract class PostUpdateHook<TEntity> : PostActionHook<TEntity>
     {
+		/// <summary>
+		/// Returns <see cref="EntityState.Modified"/> as the hookstate to listen for.
+		/// </summary>
         public override EntityState HookStates
         {
             get { return EntityState.Modified; }

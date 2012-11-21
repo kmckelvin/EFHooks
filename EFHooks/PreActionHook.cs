@@ -8,7 +8,15 @@ namespace EFHooks
     /// <typeparam name="TEntity">The type of entity this hook must watch for.</typeparam>
     public abstract class PreActionHook<TEntity> : IPreActionHook
     {
-        /// <summary>
+		/// <summary>
+		/// Gets a value indicating whether the hook is only used after successful <typeparamref name="TEntity"/> validation.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if requires validation; otherwise, <c>false</c>.
+		/// </value>
+		public abstract bool RequiresValidation { get; }
+
+		/// <summary>
         /// Entity States that this hook must be registered to listen for.
         /// </summary>
         public abstract EntityState HookStates { get; }

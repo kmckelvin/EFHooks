@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
-using System.Diagnostics;
 using System.Linq;
 using EFHooks.Tests.Hooks;
 using FakeItEasy;
@@ -15,6 +12,12 @@ namespace EFHooks.Tests
 {
     public class HookedDbContextTests
     {
+        [SetUp]
+        public void Init()
+        {
+            Database.DefaultConnectionFactory = new SqlCeConnectionFactory("System.Data.SqlServerCe.4.0");
+        }
+
         private class TimestampPreInsertHook : PreInsertHook<ITimeStamped>
         {
             public override void Hook(ITimeStamped entity, HookEntityMetadata metadata)
@@ -288,7 +291,7 @@ namespace EFHooks.Tests
         public void HookedDbContext_NameOrConnectionString()
         {
             var context = new LocalContextWithNameOrConnectionString();
-            Assert.That(context.Database.Connection.Database, Is.EqualTo("EFHooksDatabase"));
+            Assert.That(context.Database.Connection.Database, Is.EqualTo("|DataDirectory|EFHooksDatabase.sdf"));
         }
 
         [Test]

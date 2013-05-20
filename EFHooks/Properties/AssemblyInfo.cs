@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("EFHooks")]
 [assembly: AssemblyDescription("Entity Framework Hooking Tools")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Kevin McKelvin")]
+[assembly: AssemblyCompany("Visoft, Inc.")]
 [assembly: AssemblyProduct("EFHooks")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]

@@ -1,21 +1,20 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>EFHooks</id>
-    <version>1.0</version>
-    <title>EFHooks</title>
-    <authors>Kevin McKelvin</authors>
-    <owners />
-    <licenseUrl>https://raw.github.com/kmckelvin/EFHooks/master/LICENSE.txt</licenseUrl>
-    <projectUrl>http://www.github.com/kmckelvin/EFHooks</projectUrl>
-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <description>EFHooks simplifies the task of hooking code into EF Code First's extension points and separates concerns to make it easy to unit test your hooking code.</description>
-    <summary>EFHooks - Entity Framework Hooking tools</summary>
-    <tags>EF</tags>
+    <id>VisoftInc.EFHooks</id>
+    <version>1.0.3.0</version>
+    <authors>Damien White (Visoft, Inc.)</authors>
+    <owners>visoft</owners>
+    <licenseUrl>https://github.com/visoft/EFHooks/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/visoft/EFHooks</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>EFHooks simplifies the task of hooking code into EF Code First's extension points and separates concerns to make it easy to unit test your hooking code. This is based on Kevin McKelvin's EFHooks project, but has additional features, like the ability to use the existing data context within a hook.</description>
+    <copyright>Copyright 2013</copyright>
+    <tags>EF EntityFramework Entity Framework Hooks SaveChanges</tags>
     <dependencies>
-      <dependency id="EntityFramework" version="4.1.10331.0" />
+        <dependency id="EntityFramework" version="4.2" />
     </dependencies>
-  </metadata>
+    </metadata>
   <files>
     <file src="bin\Release\EFHooks.dll" target="lib\net40\EFHooks.dll" />
     <file src="bin\Release\EFHooks.xml" target="lib\net40\EFHooks.xml" />

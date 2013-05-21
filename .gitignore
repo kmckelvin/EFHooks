@@ -11,3 +11,4 @@ _ReSharper.*/
 *.user
 *.vs10x
 *.docstates
+VisoftInc.EFHooks*.nupkg

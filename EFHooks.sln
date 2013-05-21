@@ -1,16 +1,21 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFHooks", "EFHooks\EFHooks.csproj", "{5F31DE6C-B0FE-4BD2-BBB0-A62F2E625145}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{01E37805-9920-4B4E-ADAF-53544B6DBA62}"
 	ProjectSection(SolutionItems) = preProject
 		CHANGELOG.md = CHANGELOG.md
+		EFHooks.nuspec = EFHooks.nuspec
 		LICENSE.txt = LICENSE.txt
 		README.markdown = README.markdown
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFHooks.Tests", "EFHooks.Tests\EFHooks.Tests.csproj", "{6A0FBB1F-D953-4973-8D7A-D2654F0A2CA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFHooks.NET45", "EFHooks.NET45\EFHooks.NET45.csproj", "{A06C0D39-588B-4F1D-8F4B-A9BAC5930E5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFHooks.Tests.NET45", "EFHooks.Tests.NET45\EFHooks.Tests.NET45.csproj", "{D9C0300F-4E3A-4A79-9E1B-236224B013E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +31,14 @@ Global
 		{6A0FBB1F-D953-4973-8D7A-D2654F0A2CA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A0FBB1F-D953-4973-8D7A-D2654F0A2CA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A0FBB1F-D953-4973-8D7A-D2654F0A2CA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A06C0D39-588B-4F1D-8F4B-A9BAC5930E5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A06C0D39-588B-4F1D-8F4B-A9BAC5930E5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A06C0D39-588B-4F1D-8F4B-A9BAC5930E5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A06C0D39-588B-4F1D-8F4B-A9BAC5930E5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9C0300F-4E3A-4A79-9E1B-236224B013E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9C0300F-4E3A-4A79-9E1B-236224B013E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9C0300F-4E3A-4A79-9E1B-236224B013E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9C0300F-4E3A-4A79-9E1B-236224B013E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

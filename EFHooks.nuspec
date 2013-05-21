@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>VisoftInc.EFHooks</id>
-    <version>1.0.3.0</version>
+    <version>1.0.4.0</version>
     <authors>Damien White (Visoft, Inc.)</authors>
     <owners>visoft</owners>
     <licenseUrl>https://github.com/visoft/EFHooks/blob/master/LICENSE.txt</licenseUrl>
@@ -12,11 +12,13 @@
     <copyright>Copyright 2013</copyright>
     <tags>EF EntityFramework Entity Framework Hooks SaveChanges</tags>
     <dependencies>
-        <dependency id="EntityFramework" version="4.2" />
+        <dependency id="EntityFramework" version="5.0.0" />
     </dependencies>
     </metadata>
   <files>
-    <file src="bin\Release\EFHooks.dll" target="lib\net40\EFHooks.dll" />
-    <file src="bin\Release\EFHooks.xml" target="lib\net40\EFHooks.xml" />
+    <file src="lib\net40\EFHooks.dll" target="lib\net40\EFHooks.dll" />
+    <file src="lib\net40\EFHooks.xml" target="lib\net40\EFHooks.xml" />
+    <file src="lib\net45\EFHooks.dll" target="lib\net45\EFHooks.dll" />
+    <file src="lib\net45\EFHooks.xml" target="lib\net45\EFHooks.xml" />
   </files>
 </package>

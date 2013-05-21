@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("EFHooks")]
-[assembly: AssemblyDescription("Entity Framework Hooking Tools")]
+[assembly: AssemblyTitle("EFHooks.NET45")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Visoft, Inc.")]
-[assembly: AssemblyProduct("EFHooks")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("EFHooks.NET45")]
+[assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("32911070-4d8b-4059-ae87-87a304574c56")]
+[assembly: Guid("57602e84-5d5c-485e-99f9-a7841dd929c9")]
 
 // Version information for an assembly consists of the following four values:
 //

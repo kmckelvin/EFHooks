@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5F31DE6C-B0FE-4BD2-BBB0-A62F2E625145}</ProjectGuid>
+    <ProjectGuid>{A06C0D39-588B-4F1D-8F4B-A9BAC5930E5C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EFHooks</RootNamespace>
     <AssemblyName>EFHooks</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -25,16 +24,15 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\lib\net40\</OutputPath>
+    <OutputPath>..\lib\net45\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\lib\net40\EFHooks.XML</DocumentationFile>
+    <DocumentationFile>..\lib\net45\EFHooks.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -47,20 +45,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HookedDbContext.cs" />
-    <Compile Include="HookedEntityEntry.cs" />
-    <Compile Include="HookEntityMetadata.cs" />
-    <Compile Include="IHook.cs" />
-    <Compile Include="IPostActionHook.cs" />
-    <Compile Include="IPreActionHook.cs" />
-    <Compile Include="PostActionHook.cs" />
-    <Compile Include="PostDeleteHook.cs" />
-    <Compile Include="PostInsertHook.cs" />
-    <Compile Include="PostUpdateHook.cs" />
-    <Compile Include="PreActionHook.cs" />
-    <Compile Include="PreDeleteHook.cs" />
-    <Compile Include="PreInsertHook.cs" />
-    <Compile Include="PreUpdateHook.cs" />
+    <Compile Include="..\EFHooks\HookedDbContext.cs">
+      <Link>HookedDbContext.cs</Link>
+    </Compile>
+    <Compile Include="..\EFHooks\HookedEntityEntry.cs">
+      <Link>HookedEntityEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\EFHooks\HookEntityMetadata.cs">
+      <Link>HookEntityMetadata.cs</Link>
+    </Compile>
+    <Compile Include="..\EFHooks\IHook.cs">
+      <Link>IHook.cs</Link>
+    </Compile>
+    <Compile Include="..\EFHooks\IPostActionHook.cs">
+      <Link>IPostActionHook.cs</Link>
+    </Compile>
+    <Compile Include="..\EFHooks\IPreActionHook.cs">
+      <Link>IPreActionHook.cs</Link>
+    </Compile>
+    <Compile Include="..\EFHooks\PostActionHook.cs">
+      <Link>PostActionHook.cs</Link>
+    </Compile>
+    <Compile Include="..\EFHooks\PostDeleteHook.cs">
+      <Link>PostDeleteHook.cs</Link>
+    </Compile>
+    <Compile Include="..\EFHooks\PostInsertHook.cs">
+      <Link>PostInsertHook.cs</Link>
+    </Compile>
+    <Compile Include="..\EFHooks\PostUpdateHook.cs">
+      <Link>PostUpdateHook.cs</Link>
+    </Compile>
+    <Compile Include="..\EFHooks\PreActionHook.cs">
+      <Link>PreActionHook.cs</Link>
+    </Compile>
+    <Compile Include="..\EFHooks\PreDeleteHook.cs">
+      <Link>PreDeleteHook.cs</Link>
+    </Compile>
+    <Compile Include="..\EFHooks\PreInsertHook.cs">
+      <Link>PreInsertHook.cs</Link>
+    </Compile>
+    <Compile Include="..\EFHooks\PreUpdateHook.cs">
+      <Link>PreUpdateHook.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("EFHooks")]
 [assembly: AssemblyDescription("Entity Framework Hooking Tools")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Kevin McKelvin")]
+[assembly: AssemblyCompany("Visoft, Inc., Robert Sirre software development")]
 [assembly: AssemblyProduct("EFHooks")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.1.0")]
-[assembly: AssemblyFileVersion("1.0.1.0")]
+[assembly: AssemblyVersion("1.0.5.0")]
+[assembly: AssemblyFileVersion("1.0.5.0")]

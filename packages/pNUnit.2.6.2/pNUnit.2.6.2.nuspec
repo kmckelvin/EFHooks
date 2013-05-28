@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>pNUnit</id>
+    <version>2.6.2</version>
+    <title>pNUnit</title>
+    <authors>Charlie Poole</authors>
+    <owners>Charlie Poole</owners>
+    <licenseUrl>http://nunit.org/nuget/license.html</licenseUrl>
+    <projectUrl>http://nunit.org/</projectUrl>
+    <iconUrl>http://nunit.org/nuget/nunit_32x32.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>PNUnit provides a way to test applications composed of distributed, communicating components. It was developed by the folks at Codice Software for their internal use and contributed to NUnit.
+
+Note that pNUnit is not intended for running tests in parallel simply to make them run faster. It requires careful setup of each parallel test using an XML description of the individual cooperating tests.
+
+This package includes only the pNUnit framework assembly, which is referenced by your tests. Executing the tests requires using the pNUnit launcher, which is distributed as part of the NUnit.Runners package.</description>
+    <summary>PNUnit extends NUnit to support parallel distributed testing.</summary>
+    <releaseNotes />
+    <copyright />
+    <language>en-US</language>
+    <tags>test testing tdd framework parallel distributed</tags>
+  </metadata>
+</package>

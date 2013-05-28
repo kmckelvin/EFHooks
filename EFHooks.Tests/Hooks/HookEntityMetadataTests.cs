@@ -5,6 +5,21 @@ namespace EFHooks.Tests.Hooks
 {
     public class HookEntityMetadataTests
     {
+        private class LocalContext : HookedDbContext
+        {
+            public LocalContext()
+                : base()
+            {
+
+            }
+
+            public LocalContext(IHook[] hooks)
+                : base(hooks)
+            {
+
+            }
+        }
+
         [Test]
         public void HookEntityMetadata_HasEntityState()
         {
@@ -29,6 +44,14 @@ namespace EFHooks.Tests.Hooks
             Assert.AreEqual(false, result.HasStateChanged);
             result.State = EntityState.Modified;
             Assert.AreEqual(false, result.HasStateChanged);
+        }
+
+        [Test]
+        public void HookEntityMetadata_MetadataWithContext()
+        {
+            var context = new LocalContext();
+            var result = new HookEntityMetadata(EntityState.Modified, context);
+            Assert.AreEqual(context, result.CurrentContext);
         }
     }
 }

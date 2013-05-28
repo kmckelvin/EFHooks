@@ -7,7 +7,10 @@ build/
 *.suo
 *.sln.cache
 _ReSharper.*/
+*.dotCover
 *.user
 *.vs10x
 *.docstates
-EFHooks.ncrunchsolution
+*.ncrunchsolution
+*.nupkg
+*.ncrunchproject

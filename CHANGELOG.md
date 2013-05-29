@@ -15,3 +15,7 @@
 ## 1.0.5.0
 
 * Merged branches of Visoft and Robert Sirre, adding metadata validation upon save (4.5 feature)
+
+## 1.0.5.1
+
+* Bugfix related to metadata validation (causing some PreActionHooks not to to be called)

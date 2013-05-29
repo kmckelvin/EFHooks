@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.Common;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 namespace EFHooks
@@ -128,7 +127,7 @@ namespace EFHooks
 
 			ExecutePreActionHooks(modifiedEntries, false);//Regardless of validation (possible fixing validation errors too)
 
-			var hasValidationErrors = this.Configuration.ValidateOnSaveEnabled && this.ChangeTracker.Entries().Any(x => x.State != EntityState.Unchanged && x.GetValidationResult().IsValid);
+			var hasValidationErrors = this.Configuration.ValidateOnSaveEnabled && this.ChangeTracker.Entries().Any(x => x.State != EntityState.Unchanged && !x.GetValidationResult().IsValid);	
 			var hasPostHooks = this.PostHooks.Any(); // save this to a local variable since we're checking this again later.
 
 			if (!hasValidationErrors)

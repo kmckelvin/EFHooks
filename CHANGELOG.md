@@ -11,7 +11,6 @@
 * Upgraded Entity Framework to v5.0.0
 * New .NET 4.0 and .NET 4.5 assemblies
 
-
 ## 1.0.5.0
 
 * Merged branches of Visoft and Robert Sirre, adding metadata validation upon save (4.5 feature)
@@ -19,3 +18,11 @@
 ## 1.0.5.1
 
 * Bugfix related to metadata validation (causing some PreActionHooks not to to be called)
+
+## 1.0.5.2
+
+* Added feature suggested by kirkchen : https://github.com/Atrejoe/EFHooks/pull/1
+
+## 1.0.5.3
+
+* Also updated 4.5 version

@@ -17,3 +17,7 @@ _ReSharper.*/
 NuGet_publish.bat
 *.crunchsolution.cache
 packages/*/
+/lib/net40/EntityFramework.xml
+/lib/net40/EntityFramework.dll
+/lib/net45/EntityFramework.dll
+/lib/net45/EntityFramework.xml

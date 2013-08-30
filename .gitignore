@@ -16,3 +16,4 @@ _ReSharper.*/
 *.ncrunchproject
 NuGet_publish.bat
 *.crunchsolution.cache
+packages/*/

@@ -125,10 +125,10 @@ namespace EFHooks
                                             })
                                             .ToArray();
 
-            ExecutePreActionHooks(modifiedEntries, false);//Regardless of validation (possible fixing validation errors too)
+            ExecutePreActionHooks(modifiedEntries, false);//Regardless of validation (executing the hook possibly fixes validation errors)
 
             var hasValidationErrors = this.Configuration.ValidateOnSaveEnabled && this.ChangeTracker.Entries().Any(x => x.State != EntityState.Unchanged && !x.GetValidationResult().IsValid);
-            var hasPostHooks = this.PostHooks.Any(); // save this to a local variable since we're checking this again later.
+            var hasPostHooks = this.PostHooks.Any(); // Save this to a local variable since we're checking this again later.
 
             if (!hasValidationErrors)
             {
@@ -142,6 +142,8 @@ namespace EFHooks
                 foreach (var entityEntry in modifiedEntries)
                 {
                     var entry = entityEntry;
+					
+					//Obtains hooks that 'listen' to one or more Entity States
 					foreach (var hook in PostHooks.Where(x => (x.HookStates & entry.PreSaveState) == entry.PreSaveState))
                     {
                         var metadata = new HookEntityMetadata(entityEntry.PreSaveState, this);

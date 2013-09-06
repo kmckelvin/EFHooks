@@ -89,6 +89,14 @@
             <param name="modifiedEntries">The modified entries to execute hooks for.</param>
             <param name="requiresValidation">if set to <c>true</c> executes hooks that require validation, otherwise executes hooks that do NOT require validation.</param>
         </member>
+        <member name="P:EFHooks.HookedEntityEntry.PreSaveState">
+            <summary>
+            Gets or sets the state of the entity before saving.
+            </summary>
+            <value>
+            The state of the entity before saving.
+            </value>
+        </member>
         <member name="T:EFHooks.HookEntityMetadata">
             <summary>
             Contains entity state, and an indication wether is has been changed.
@@ -137,14 +145,15 @@
             <param name="entity">The entity.</param>
             <param name="metadata">The metadata.</param>
         </member>
+        <member name="P:EFHooks.IHook.HookStates">
+            <summary>
+            Gets the entity state(s) to listen for.
+            </summary>
+            <remarks>The entity state being <see cref="T:System.FlagsAttribute"/>, it allows this hook to listen to multiple states.</remarks>
+        </member>
         <member name="T:EFHooks.IPostActionHook">
             <summary>
             A hook that is executed after an action.
-            </summary>
-        </member>
-        <member name="P:EFHooks.IPostActionHook.HookStates">
-            <summary>
-            Gets the entity state to listen for.
             </summary>
         </member>
         <member name="T:EFHooks.IPreActionHook">
@@ -158,14 +167,6 @@
             </summary>
             <value>
               <c>true</c> if requires validation; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:EFHooks.IPreActionHook.HookStates">
-            <summary>
-            Gets the entity state to listen for.
-            </summary>
-            <value>
-            The hook states.
             </value>
         </member>
         <member name="T:EFHooks.PostActionHook`1">
@@ -280,6 +281,16 @@
         <member name="P:EFHooks.PreUpdateHook`1.HookStates">
             <summary>
             Returns <see cref="F:System.Data.EntityState.Modified"/> as the hookstate to listen for.
+            </summary>
+        </member>
+        <member name="T:EFHooks.Properties.Constants">
+            <summary>
+            EFHooks constant values
+            </summary>
+        </member>
+        <member name="F:EFHooks.Properties.Constants.Version">
+            <summary>
+            The version
             </summary>
         </member>
     </members>

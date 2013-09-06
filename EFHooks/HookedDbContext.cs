@@ -142,7 +142,7 @@ namespace EFHooks
                 foreach (var entityEntry in modifiedEntries)
                 {
                     var entry = entityEntry;
-                    foreach (var hook in PostHooks.Where(x => x.HookStates == entry.PreSaveState))
+					foreach (var hook in PostHooks.Where(x => (x.HookStates & entry.PreSaveState) == entry.PreSaveState))
                     {
                         var metadata = new HookEntityMetadata(entityEntry.PreSaveState, this);
                         hook.HookObject(entityEntry.Entity, metadata);

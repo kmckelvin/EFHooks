@@ -26,3 +26,8 @@
 ## 1.0.5.3
 
 * Also updated 4.5 version
+
+## 1.0.5.4
+
+* Bugfix > Corrected failing unit test
+* Feature > Allowed IHook to target multiple Entity States

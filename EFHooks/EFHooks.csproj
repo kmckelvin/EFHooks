@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\Constants.cs" />
     <Compile Include="HookedDbContext.cs" />
     <Compile Include="HookedEntityEntry.cs" />
     <Compile Include="HookEntityMetadata.cs" />

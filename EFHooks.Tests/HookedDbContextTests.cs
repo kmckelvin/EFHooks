@@ -24,7 +24,7 @@ namespace EFHooks.Tests
 		{
 			public override bool RequiresValidation
 			{
-				get { return false; }
+				get { return true; }
 			}
 			public override void Hook(ITimeStamped entity, HookEntityMetadata metadata)
 			{

@@ -112,7 +112,7 @@
             Contains entity state, and an indication wether is has been changed.
             </summary>
         </member>
-        <member name="M:EFHooks.HookEntityMetadata.#ctor(System.Data.EntityState,EFHooks.HookedDbContext)">
+        <member name="M:EFHooks.HookEntityMetadata.#ctor(System.Data.Entity.EntityState,EFHooks.HookedDbContext)">
             <summary>
             Initializes a new instance of the <see cref="T:EFHooks.HookEntityMetadata"/> class.
             </summary>
@@ -208,7 +208,7 @@
         </member>
         <member name="P:EFHooks.PostDeleteHook`1.HookStates">
             <summary>
-            Returns <see cref="F:System.Data.EntityState.Deleted"/> as the hookstate to listen for.
+            Returns <see cref="F:System.Data.Entity.EntityState.Deleted"/> as the hookstate to listen for.
             </summary>
         </member>
         <member name="T:EFHooks.PostInsertHook`1">
@@ -218,7 +218,7 @@
         </member>
         <member name="P:EFHooks.PostInsertHook`1.HookStates">
             <summary>
-            Returns <see cref="F:System.Data.EntityState.Added"/> as the hookstate to listen for.
+            Returns <see cref="F:System.Data.Entity.EntityState.Added"/> as the hookstate to listen for.
             </summary>
         </member>
         <member name="T:EFHooks.PostUpdateHook`1">
@@ -228,7 +228,7 @@
         </member>
         <member name="P:EFHooks.PostUpdateHook`1.HookStates">
             <summary>
-            Returns <see cref="F:System.Data.EntityState.Modified"/> as the hookstate to listen for.
+            Returns <see cref="F:System.Data.Entity.EntityState.Modified"/> as the hookstate to listen for.
             </summary>
         </member>
         <member name="T:EFHooks.PreActionHook`1">
@@ -270,7 +270,7 @@
         </member>
         <member name="P:EFHooks.PreDeleteHook`1.HookStates">
             <summary>
-            Returns <see cref="F:System.Data.EntityState.Deleted"/> as the hookstate to listen for.
+            Returns <see cref="F:System.Data.Entity.EntityState.Deleted"/> as the hookstate to listen for.
             </summary>
         </member>
         <member name="T:EFHooks.PreInsertHook`1">
@@ -280,7 +280,7 @@
         </member>
         <member name="P:EFHooks.PreInsertHook`1.HookStates">
             <summary>
-            Returns <see cref="F:System.Data.EntityState.Added"/> as the hookstate to listen for.
+            Returns <see cref="F:System.Data.Entity.EntityState.Added"/> as the hookstate to listen for.
             </summary>
         </member>
         <member name="T:EFHooks.PreUpdateHook`1">
@@ -290,7 +290,7 @@
         </member>
         <member name="P:EFHooks.PreUpdateHook`1.HookStates">
             <summary>
-            Returns <see cref="F:System.Data.EntityState.Modified"/> as the hookstate to listen for.
+            Returns <see cref="F:System.Data.Entity.EntityState.Modified"/> as the hookstate to listen for.
             </summary>
         </member>
     </members>

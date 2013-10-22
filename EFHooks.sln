@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFHooks", "EFHooks\EFHooks.csproj", "{5F31DE6C-B0FE-4BD2-BBB0-A62F2E625145}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{01E37805-9920-4B4E-ADAF-53544B6DBA62}"
@@ -9,7 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		EFHooks.nuspec = EFHooks.nuspec
 		LICENSE.txt = LICENSE.txt
 		NuGet_pack.bat = NuGet_pack.bat
-		NuGet_publish.bat = NuGet_publish.bat
 		README.markdown = README.markdown
 	EndProjectSection
 EndProject

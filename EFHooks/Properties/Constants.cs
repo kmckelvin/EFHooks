@@ -8,7 +8,7 @@
 		/// <summary>
 		/// The version
 		/// </summary>
-		public const string Version = "1.0.5.4";
+		public const string Version = "2.0.0.0";
 	}
 
 }

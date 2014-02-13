@@ -1,3 +1,7 @@
+## EFHooks
+
+This repo is no longer maintained since I've left the Microsoft/C# environment. Use visoft's fork instead: https://github.com/visoft/EFHooks.
+
 EFHooks is a framework to assist in hooking into the Entity Framework Code First before and after insert, update and delete actions are performed on the database.
 
 EFHooks is designed to lend itself to code that is easy to unit test with the least amount of mocking possible and without cluttering up your DbContext class with hooking code.  It also is designed to play well with IoC containers.

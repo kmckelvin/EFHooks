@@ -231,6 +231,20 @@ namespace EFHooks.Tests
 
 			Assert.AreEqual(entity.CreatedAt.Date, DateTime.Today);
 		}
+        [Test]
+        public async void HookedDbContext_MustCallHooks_WhenRunningSaveChangesAsync() {
+            var hooks = new IHook[]
+                            {
+                                new TimestampPreInsertHook()
+                            };
+
+            var context = new LocalContext(hooks);
+            var entity = new TimestampedSoftDeletedEntity();
+            context.Entities.Add(entity);
+            await context.SaveChangesAsync();
+
+            Assert.AreEqual(entity.CreatedAt.Date, DateTime.Today);
+        }
 
 		[Test]
 		public void HookedDbContext_MustNotCallHooks_IfModelIsInvalid()

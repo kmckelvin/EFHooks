@@ -1,0 +1,297 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EFHooks</name>
+    </assembly>
+    <members>
+        <member name="T:EFHooks.HookedDbContext">
+            <summary>
+            An Entity Framework DbContext that can be hooked into by registering EFHooks.IHook objects.
+            </summary>
+        </member>
+        <member name="F:EFHooks.HookedDbContext.PreHooks">
+            <summary>
+            The pre-action hooks.
+            </summary>
+        </member>
+        <member name="F:EFHooks.HookedDbContext.PostHooks">
+            <summary>
+            The post-action hooks.
+            </summary>
+        </member>
+        <member name="M:EFHooks.HookedDbContext.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext"/> class, initializing empty lists of hooks.
+            </summary>
+        </member>
+        <member name="M:EFHooks.HookedDbContext.#ctor(EFHooks.IHook[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext"/> class, filling <see cref="F:EFHooks.HookedDbContext.PreHooks"/> and <see cref="F:EFHooks.HookedDbContext.PostHooks"/>.
+            </summary>
+            <param name="hooks">The hooks.</param>
+        </member>
+        <member name="M:EFHooks.HookedDbContext.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext"/> class, using the specified <paramref name="nameOrConnectionString"/>, initializing empty lists of hooks.
+            </summary>
+            <param name="nameOrConnectionString">The name or connection string.</param>
+        </member>
+        <member name="M:EFHooks.HookedDbContext.#ctor(EFHooks.IHook[],System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext"/> class, using the specified <paramref name="nameOrConnectionString"/>, , filling <see cref="F:EFHooks.HookedDbContext.PreHooks"/> and <see cref="F:EFHooks.HookedDbContext.PostHooks"/>.
+            </summary>
+            <param name="hooks">The hooks.</param>
+            <param name="nameOrConnectionString">The name or connection string.</param>
+        </member>
+        <member name="M:EFHooks.HookedDbContext.#ctor(System.Data.Common.DbConnection,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext"/> class using the an existing connection to connect 
+            to a database. The connection will not be disposed when the context is disposed. (see <see cref="T:System.Data.Entity.DbContext"/> overloaded constructor)
+            </summary>
+            <param name="existingConnection">An existing connection to use for the new context.</param>
+            <param name="contextOwnsConnection">If set to true the connection is disposed when the context is disposed, otherwise the caller must dispose the connection.</param>
+            <remarks>Main reason for allowing this, is to enable reusing another database connection. (For instance one that is profiled by Miniprofiler (http://miniprofiler.com/)).</remarks>
+        </member>
+        <member name="M:EFHooks.HookedDbContext.#ctor(EFHooks.IHook[],System.Data.Common.DbConnection,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext"/> class using the an existing connection to connect 
+            to a database. The connection will not be disposed when the context is disposed. (see <see cref="T:System.Data.Entity.DbContext"/> overloaded constructor)
+            </summary>
+            <param name="hooks">The hooks.</param>
+            <param name="existingConnection">An existing connection to use for the new context.</param>
+            <param name="contextOwnsConnection">If set to true the connection is disposed when the context is disposed, otherwise the caller must dispose the connection.</param>
+            <remarks>Main reason for allowing this, is to enable reusing another database connection. (For instance one that is profiled by Miniprofiler (http://miniprofiler.com/)).</remarks>
+        </member>
+        <member name="M:EFHooks.HookedDbContext.RegisterHook(EFHooks.IPreActionHook)">
+            <summary>
+            Registers a hook to run before a database action occurs.
+            </summary>
+            <param name="hook">The hook to register.</param>
+        </member>
+        <member name="M:EFHooks.HookedDbContext.RegisterHook(EFHooks.IPostActionHook)">
+            <summary>
+            Registers a hook to run after a database action occurs.
+            </summary>
+            <param name="hook">The hook to register.</param>
+        </member>
+        <member name="M:EFHooks.HookedDbContext.SaveChanges">
+            <summary>
+            Saves all changes made in this context to the underlying database.
+            </summary>
+            <returns>
+            The number of objects written to the underlying database.
+            </returns>
+        </member>
+        <member name="M:EFHooks.HookedDbContext.ExecutePreActionHooks(System.Collections.Generic.IEnumerable{EFHooks.HookedEntityEntry},System.Boolean)">
+            <summary>
+            Executes the pre action hooks, filtered by <paramref name="requiresValidation"/>.
+            </summary>
+            <param name="modifiedEntries">The modified entries to execute hooks for.</param>
+            <param name="requiresValidation">if set to <c>true</c> executes hooks that require validation, otherwise executes hooks that do NOT require validation.</param>
+        </member>
+        <member name="P:EFHooks.HookedEntityEntry.PreSaveState">
+            <summary>
+            Gets or sets the state of the entity before saving.
+            </summary>
+            <value>
+            The state of the entity before saving.
+            </value>
+        </member>
+        <member name="T:EFHooks.HookEntityMetadata">
+            <summary>
+            Contains entity state, and an indication wether is has been changed.
+            </summary>
+        </member>
+        <member name="M:EFHooks.HookEntityMetadata.#ctor(System.Data.Entity.EntityState,EFHooks.HookedDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EFHooks.HookEntityMetadata"/> class.
+            </summary>
+            <param name="state">The state.</param>
+            <param name="context">The optional existing context (I believe this is usable for migrations).</param>
+        </member>
+        <member name="P:EFHooks.HookEntityMetadata.State">
+            <summary>
+            Gets or sets the state.
+            </summary>
+            <value>
+            The state.
+            </value>
+        </member>
+        <member name="P:EFHooks.HookEntityMetadata.HasStateChanged">
+            <summary>
+            Gets a value indicating whether this instance has state changed.
+            </summary>
+            <value>
+            <c>true</c> if this instance has state changed; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:EFHooks.HookEntityMetadata.CurrentContext">
+            <summary>
+            Container for wrapped context?
+            </summary>
+            <value>
+            The current context.
+            </value>
+        </member>
+        <member name="T:EFHooks.IHook">
+            <summary>
+            A 'hook' usable for calling at certain point in an entities life cycle.
+            </summary>
+        </member>
+        <member name="M:EFHooks.IHook.HookObject(System.Object,EFHooks.HookEntityMetadata)">
+            <summary>
+            Executes the logic in the hook.
+            </summary>
+            <param name="entity">The entity.</param>
+            <param name="metadata">The metadata.</param>
+        </member>
+        <member name="P:EFHooks.IHook.HookStates">
+            <summary>
+            Gets the entity state(s) to listen for.
+            </summary>
+            <remarks>The entity state being <see cref="T:System.FlagsAttribute"/>, it allows this hook to listen to multiple states.</remarks>
+        </member>
+        <member name="T:EFHooks.IPostActionHook">
+            <summary>
+            A hook that is executed after an action.
+            </summary>
+        </member>
+        <member name="T:EFHooks.IPreActionHook">
+            <summary>
+            A hook that is executed before an action.
+            </summary>
+        </member>
+        <member name="P:EFHooks.IPreActionHook.RequiresValidation">
+            <summary>
+            Gets a value indicating whether the hook is only used after successful validation.
+            </summary>
+            <value>
+              <c>true</c> if requires validation; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:EFHooks.PostActionHook`1">
+            <summary>
+            Implements a strongly-typed hook to be run after an action is performed in the database.
+            </summary>
+            <typeparam name="TEntity">The type of entity this hook must watch for.</typeparam>
+        </member>
+        <member name="M:EFHooks.PostActionHook`1.HookObject(System.Object,EFHooks.HookEntityMetadata)">
+            <summary>
+            Implements the interface.  This causes the hook to only run for objects that are assignable to TEntity.
+            </summary>
+        </member>
+        <member name="M:EFHooks.PostActionHook`1.Hook(`0,EFHooks.HookEntityMetadata)">
+            <summary>
+            The logic to perform per entity after the registered action gets performed.
+            This gets run once per entity that has been changed.
+            </summary>
+        </member>
+        <member name="P:EFHooks.PostActionHook`1.HookStates">
+            <summary>
+            Entity States that this hook must be registered to listen for.
+            </summary>
+        </member>
+        <member name="T:EFHooks.PostDeleteHook`1">
+            <summary>
+            Implements a hook that will run after an entity gets deleted from the database.
+            </summary>
+        </member>
+        <member name="P:EFHooks.PostDeleteHook`1.HookStates">
+            <summary>
+            Returns <see cref="F:System.Data.Entity.EntityState.Deleted"/> as the hookstate to listen for.
+            </summary>
+        </member>
+        <member name="T:EFHooks.PostInsertHook`1">
+            <summary>
+            Implements a hook that will run after an entity gets inserted into the database.
+            </summary>
+        </member>
+        <member name="P:EFHooks.PostInsertHook`1.HookStates">
+            <summary>
+            Returns <see cref="F:System.Data.Entity.EntityState.Added"/> as the hookstate to listen for.
+            </summary>
+        </member>
+        <member name="T:EFHooks.PostUpdateHook`1">
+            <summary>
+            Implements a hook that will run after an entity gets updated in the database.
+            </summary>
+        </member>
+        <member name="P:EFHooks.PostUpdateHook`1.HookStates">
+            <summary>
+            Returns <see cref="F:System.Data.Entity.EntityState.Modified"/> as the hookstate to listen for.
+            </summary>
+        </member>
+        <member name="T:EFHooks.PreActionHook`1">
+            <summary>
+            A strongly typed PreActionHook.
+            </summary>
+            <typeparam name="TEntity">The type of entity this hook must watch for.</typeparam>
+        </member>
+        <member name="M:EFHooks.PreActionHook`1.Hook(`0,EFHooks.HookEntityMetadata)">
+            <summary>
+            The logic to perform per entity before the registered action gets performed.
+            This gets run once per entity that has been changed.
+            </summary>
+            <param name="entity">The entity that is processed by Entity Framework.</param>
+            <param name="metadata">Metadata about the entity in the context of this hook - such as state.</param>
+        </member>
+        <member name="M:EFHooks.PreActionHook`1.HookObject(System.Object,EFHooks.HookEntityMetadata)">
+            <summary>
+            Implements the interface.  This causes the hook to only run for objects that are assignable to TEntity.
+            </summary>
+        </member>
+        <member name="P:EFHooks.PreActionHook`1.RequiresValidation">
+            <summary>
+            Gets a value indicating whether the hook is only used after successful <typeparamref name="TEntity"/> validation.
+            </summary>
+            <value>
+              <c>true</c> if requires validation; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:EFHooks.PreActionHook`1.HookStates">
+            <summary>
+            Entity States that this hook must be registered to listen for.
+            </summary>
+        </member>
+        <member name="T:EFHooks.PreDeleteHook`1">
+            <summary>
+            Implements a hook that will run before an entity gets deleted from the database.
+            </summary>
+        </member>
+        <member name="P:EFHooks.PreDeleteHook`1.HookStates">
+            <summary>
+            Returns <see cref="F:System.Data.Entity.EntityState.Deleted"/> as the hookstate to listen for.
+            </summary>
+        </member>
+        <member name="T:EFHooks.PreInsertHook`1">
+            <summary>
+            Implements a hook that will run before an entity gets inserted into the database.
+            </summary>
+        </member>
+        <member name="P:EFHooks.PreInsertHook`1.HookStates">
+            <summary>
+            Returns <see cref="F:System.Data.Entity.EntityState.Added"/> as the hookstate to listen for.
+            </summary>
+        </member>
+        <member name="T:EFHooks.PreUpdateHook`1">
+            <summary>
+            Implements a hook that will run before an entity gets updated in the database.
+            </summary>
+        </member>
+        <member name="P:EFHooks.PreUpdateHook`1.HookStates">
+            <summary>
+            Returns <see cref="F:System.Data.Entity.EntityState.Modified"/> as the hookstate to listen for.
+            </summary>
+        </member>
+        <member name="T:EFHooks.Properties.Constants">
+            <summary>
+            EFHooks constant values
+            </summary>
+        </member>
+        <member name="F:EFHooks.Properties.Constants.Version">
+            <summary>
+            The version
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Data;
+using System.Data.Entity;
 using NUnit.Framework;
 
 namespace EFHooks.Tests.Hooks
@@ -8,6 +8,11 @@ namespace EFHooks.Tests.Hooks
     {
         private class TimestampPreInsertHook : PreInsertHook<ITimeStamped>
         {
+			public override bool RequiresValidation
+			{
+				get { return false; }
+			}
+
             public override void Hook(ITimeStamped entity, HookEntityMetadata metadata)
             {
                 entity.CreatedAt = DateTime.Now;

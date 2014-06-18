@@ -1,4 +1,4 @@
-using System.Data;
+using System.Data.Entity;
 
 namespace EFHooks
 {
@@ -7,6 +7,9 @@ namespace EFHooks
     /// </summary>
     public abstract class PostDeleteHook<TEntity> : PostActionHook<TEntity>
     {
+		/// <summary>
+		/// Returns <see cref="EntityState.Deleted"/> as the hookstate to listen for.
+		/// </summary>
         public override EntityState HookStates
         {
             get { return EntityState.Deleted; }

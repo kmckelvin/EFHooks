@@ -82,7 +82,21 @@
             The number of objects written to the underlying database.
             </returns>
         </member>
-        <member name="M:EFHooks.HookedDbContext.ExecutePreActionHooks(System.Collections.Generic.IEnumerable{EFHooks.HookedEntityEntry},System.Boolean)">
+        <member name="M:EFHooks.HookedDbContext.SaveChangesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously saves all changes made in this context to the underlying database.
+            </summary>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> to observe while waiting for the task to complete.</param>
+            <returns>
+            A task that represents the asynchronous save operation.
+            The task result contains the number of objects written to the underlying database.
+            </returns>
+            <remarks>
+            Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+            that any asynchronous operations have completed before calling another method on this context.
+            </remarks>
+        </member>
+        <member name="M:EFHooks.HookedDbContext.HookRunner.ExecutePreActionHooks(System.Collections.Generic.IEnumerable{EFHooks.HookedEntityEntry},System.Boolean)">
             <summary>
             Executes the pre action hooks, filtered by <paramref name="requiresValidation"/>.
             </summary>

@@ -91,6 +91,7 @@
     <Compile Include="..\EFHooks.Tests\Hooks\PreUpdateHookTests.cs">
       <Link>Hooks\PreUpdateHookTests.cs</Link>
     </Compile>
+    <Compile Include="HookedDbContextTestsAsync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@ namespace EFHooks
 	/// <summary>
 	/// An Entity Framework DbContext that can be hooked into by registering EFHooks.IHook objects.
 	/// </summary>
-	public abstract class HookedDbContext : DbContext
+    public abstract partial class HookedDbContext : DbContext
 	{
 		/// <summary>
 		/// The pre-action hooks.
@@ -123,15 +123,7 @@ namespace EFHooks
 		    hookExecution.RunPostActionHooks();
 			return result;
 		}
-
-	    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken) {
-            var hookExecution = new HookRunner(this);
-            hookExecution.RunPreActionHooks();
-            var result = await base.SaveChangesAsync(cancellationToken);
-            hookExecution.RunPostActionHooks();
-            return result;
-        }
-
+        
 	    class HookRunner
 	    {
 	        private HookedDbContext ctx;

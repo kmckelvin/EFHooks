@@ -99,6 +99,7 @@
     <Compile Include="..\EFHooks\Properties\Constants.cs">
       <Link>Properties\Constants.cs</Link>
     </Compile>
+    <Compile Include="HookedDbContextAsync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,2 +1,2 @@
-NuGet Update -self
-NuGet pack EFHooks.nuspec -Prop Configuration=Release -IncludeReferencedProjects
+.nuget\NuGet Update -self
+.nuget\NuGet pack EFHooks.nuspec -Prop Configuration=Release -IncludeReferencedProjects

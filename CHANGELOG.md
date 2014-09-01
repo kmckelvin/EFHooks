@@ -36,3 +36,7 @@
 
 * **Breaking Changes**
 * Upgraded Entity Framework to v6.0.1 - EF6 changed namespaces (e.g. `System.Data` to `System.Data.Entity`) around. Because of this, v2.0+ won't work with EF5. Please continue to use an earlier version for your EF5 projects.
+
+## 2.1.0.0
+
+* Added savechanges async

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Atreyu.EFHooks</id>
-    <version>3.0.0.0</version>
+    <version>2.1.0.0</version>
     <authors>Damien White (Visoft, Inc.), Robert Sirre</authors>
     <owners>visoft, Robert Sirre software development</owners>
     <licenseUrl>https://github.com/Atrejoe/EFHooks/blob/master/LICENSE.txt</licenseUrl>
@@ -19,6 +19,8 @@
     </dependencies>
     </metadata>
   <files>
+    <file src="lib\net40\EFHooks.dll" target="lib\net40\EFHooks.dll" />
+    <file src="lib\net40\EFHooks.xml" target="lib\net40\EFHooks.xml" />
     <file src="lib\net45\EFHooks.dll" target="lib\net45\EFHooks.dll" />
     <file src="lib\net45\EFHooks.xml" target="lib\net45\EFHooks.xml" />
   </files>

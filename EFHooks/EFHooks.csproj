@@ -56,6 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPostLoadHook.cs" />
+    <Compile Include="PostLoadHook.cs" />
     <Compile Include="Properties\Constants.cs" />
     <Compile Include="HookedDbContext.cs" />
     <Compile Include="HookedEntityEntry.cs" />

@@ -83,7 +83,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EFHooks\EFHooks.csproj">
       <Project>{5F31DE6C-B0FE-4BD2-BBB0-A62F2E625145}</Project>

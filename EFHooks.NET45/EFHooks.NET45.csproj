@@ -71,6 +71,9 @@
     <Compile Include="..\EFHooks\IPostActionHook.cs">
       <Link>IPostActionHook.cs</Link>
     </Compile>
+    <Compile Include="..\EFHooks\IPostLoadHook.cs">
+      <Link>IPostLoadHook.cs</Link>
+    </Compile>
     <Compile Include="..\EFHooks\IPreActionHook.cs">
       <Link>IPreActionHook.cs</Link>
     </Compile>
@@ -82,6 +85,9 @@
     </Compile>
     <Compile Include="..\EFHooks\PostInsertHook.cs">
       <Link>PostInsertHook.cs</Link>
+    </Compile>
+    <Compile Include="..\EFHooks\PostLoadHook.cs">
+      <Link>PostLoadHook.cs</Link>
     </Compile>
     <Compile Include="..\EFHooks\PostUpdateHook.cs">
       <Link>PostUpdateHook.cs</Link>

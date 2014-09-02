@@ -20,6 +20,18 @@ namespace EFHooks.Tests
 			Database.DefaultConnectionFactory = new SqlCeConnectionFactory("System.Data.SqlServerCe.4.0");
 		}
 
+
+        private class TimestampPostLoadHook : PostLoadHook<ITimeStamped>
+        {
+
+            public bool HasRun { get; set; }
+
+            public override void Hook(ITimeStamped entity, HookEntityMetadata metadata)
+            {
+                HasRun = true;
+            }
+        }
+
 		private class TimestampPreInsertHook : PreInsertHook<ITimeStamped>
 		{
 			public override bool RequiresValidation
@@ -31,6 +43,8 @@ namespace EFHooks.Tests
 				entity.CreatedAt = DateTime.Now;
 			}
 		}
+
+
 
 		private class TimestampPreUpdateHook : PreUpdateHook<ITimeStamped>
 		{
@@ -231,6 +245,24 @@ namespace EFHooks.Tests
 
 			Assert.AreEqual(entity.CreatedAt.Date, DateTime.Today);
 		}
+
+        [Test]
+        public void HookedDbContext_MustCallHooks_WhenMaterializingObject()
+        {
+            var hook = new TimestampPostLoadHook();
+
+            var context = new LocalContext();
+            var entity = new TimestampedSoftDeletedEntity() { CreatedAt = DateTime.Now };
+            context.Entities.Add(entity);
+            context.SaveChanges();
+            long id = entity.Id;
+
+            context = new LocalContext();
+            context.RegisterHook(hook);
+            var loadedEntity = context.Entities.Find(id);
+
+            Assert.IsTrue(hook.HasRun);
+        }
 
 		[Test]
 		public void HookedDbContext_MustNotCallHooks_IfModelIsInvalid()

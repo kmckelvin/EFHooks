@@ -39,4 +39,8 @@
 
 ## 2.1.0.0
 
-* Added savechanges async
+* Added SaveChanges async, by George Mauer (togakangaroo)
+
+## 2.2.0.0
+
+* Added PostLoadHook, by Thomas Haug (tshaug)

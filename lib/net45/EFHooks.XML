@@ -19,6 +19,11 @@
             The post-action hooks.
             </summary>
         </member>
+        <member name="F:EFHooks.HookedDbContext.PostLoadHooks">
+            <summary>
+            The Post load hooks.
+            </summary>
+        </member>
         <member name="M:EFHooks.HookedDbContext.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext"/> class, initializing empty lists of hooks.
@@ -71,6 +76,12 @@
         <member name="M:EFHooks.HookedDbContext.RegisterHook(EFHooks.IPostActionHook)">
             <summary>
             Registers a hook to run after a database action occurs.
+            </summary>
+            <param name="hook">The hook to register.</param>
+        </member>
+        <member name="M:EFHooks.HookedDbContext.RegisterHook(EFHooks.IPostLoadHook)">
+            <summary>
+            Registers a hook to run after a database load occurs.
             </summary>
             <param name="hook">The hook to register.</param>
         </member>
@@ -170,6 +181,11 @@
             A hook that is executed after an action.
             </summary>
         </member>
+        <member name="T:EFHooks.IPostLoadHook">
+            <summary>
+            A hook that is executed after an entity has been loaded.
+            </summary>
+        </member>
         <member name="T:EFHooks.IPreActionHook">
             <summary>
             A hook that is executed before an action.
@@ -223,6 +239,28 @@
         <member name="P:EFHooks.PostInsertHook`1.HookStates">
             <summary>
             Returns <see cref="F:System.Data.Entity.EntityState.Added"/> as the hookstate to listen for.
+            </summary>
+        </member>
+        <member name="T:EFHooks.PostLoadHook`1">
+            <summary>
+            Implements a strongly-typed hook to be run after an load from the database has been performed.
+            </summary>
+            <typeparam name="TEntity">The type of entity this hook must watch for.</typeparam>
+        </member>
+        <member name="M:EFHooks.PostLoadHook`1.HookObject(System.Object,EFHooks.HookEntityMetadata)">
+            <summary>
+            Implements the interface.  This causes the hook to only run for objects that are assignable to TEntity.
+            </summary>
+        </member>
+        <member name="M:EFHooks.PostLoadHook`1.Hook(`0,EFHooks.HookEntityMetadata)">
+            <summary>
+            The logic to perform per entity after the registered action gets performed.
+            This gets run once per entity that has been changed.
+            </summary>
+        </member>
+        <member name="P:EFHooks.PostLoadHook`1.HookStates">
+            <summary>
+            Entity States that this hook must be registered to listen for.
             </summary>
         </member>
         <member name="T:EFHooks.PostUpdateHook`1">

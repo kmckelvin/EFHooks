@@ -4,6 +4,51 @@
         <name>EFHooks</name>
     </assembly>
     <members>
+        <member name="T:EFHooks.IPostLoadHook">
+            <summary>
+            A hook that is executed after an entity has been loaded.
+            </summary>
+        </member>
+        <member name="T:EFHooks.IHook">
+            <summary>
+            A 'hook' usable for calling at certain point in an entities life cycle.
+            </summary>
+        </member>
+        <member name="M:EFHooks.IHook.HookObject(System.Object,EFHooks.HookEntityMetadata)">
+            <summary>
+            Executes the logic in the hook.
+            </summary>
+            <param name="entity">The entity.</param>
+            <param name="metadata">The metadata.</param>
+        </member>
+        <member name="P:EFHooks.IHook.HookStates">
+            <summary>
+            Gets the entity state(s) to listen for.
+            </summary>
+            <remarks>The entity state being <see cref="T:System.FlagsAttribute"/>, it allows this hook to listen to multiple states.</remarks>
+        </member>
+        <member name="T:EFHooks.PostLoadHook`1">
+            <summary>
+            Implements a strongly-typed hook to be run after an load from the database has been performed.
+            </summary>
+            <typeparam name="TEntity">The type of entity this hook must watch for.</typeparam>
+        </member>
+        <member name="M:EFHooks.PostLoadHook`1.HookObject(System.Object,EFHooks.HookEntityMetadata)">
+            <summary>
+            Implements the interface.  This causes the hook to only run for objects that are assignable to TEntity.
+            </summary>
+        </member>
+        <member name="M:EFHooks.PostLoadHook`1.Hook(`0,EFHooks.HookEntityMetadata)">
+            <summary>
+            The logic to perform per entity after the registered action gets performed.
+            This gets run once per entity that has been changed.
+            </summary>
+        </member>
+        <member name="P:EFHooks.PostLoadHook`1.HookStates">
+            <summary>
+            Entity States that this hook must be registered to listen for.
+            </summary>
+        </member>
         <member name="T:EFHooks.Properties.Constants">
             <summary>
             EFHooks constant values
@@ -27,6 +72,11 @@
         <member name="F:EFHooks.HookedDbContext.PostHooks">
             <summary>
             The post-action hooks.
+            </summary>
+        </member>
+        <member name="F:EFHooks.HookedDbContext.PostLoadHooks">
+            <summary>
+            The Post load hooks.
             </summary>
         </member>
         <member name="M:EFHooks.HookedDbContext.#ctor">
@@ -81,6 +131,12 @@
         <member name="M:EFHooks.HookedDbContext.RegisterHook(EFHooks.IPostActionHook)">
             <summary>
             Registers a hook to run after a database action occurs.
+            </summary>
+            <param name="hook">The hook to register.</param>
+        </member>
+        <member name="M:EFHooks.HookedDbContext.RegisterHook(EFHooks.IPostLoadHook)">
+            <summary>
+            Registers a hook to run after a database load occurs.
             </summary>
             <param name="hook">The hook to register.</param>
         </member>
@@ -142,24 +198,6 @@
             <value>
             The current context.
             </value>
-        </member>
-        <member name="T:EFHooks.IHook">
-            <summary>
-            A 'hook' usable for calling at certain point in an entities life cycle.
-            </summary>
-        </member>
-        <member name="M:EFHooks.IHook.HookObject(System.Object,EFHooks.HookEntityMetadata)">
-            <summary>
-            Executes the logic in the hook.
-            </summary>
-            <param name="entity">The entity.</param>
-            <param name="metadata">The metadata.</param>
-        </member>
-        <member name="P:EFHooks.IHook.HookStates">
-            <summary>
-            Gets the entity state(s) to listen for.
-            </summary>
-            <remarks>The entity state being <see cref="T:System.FlagsAttribute"/>, it allows this hook to listen to multiple states.</remarks>
         </member>
         <member name="T:EFHooks.IPostActionHook">
             <summary>

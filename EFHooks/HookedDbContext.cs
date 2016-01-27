@@ -30,25 +30,24 @@ namespace EFHooks
         /// Initializes a new instance of the <see cref="HookedDbContext" /> class, initializing empty lists of hooks.
         /// </summary>
         public HookedDbContext()
-            : base()
-        {
-            PreHooks = new List<IPreActionHook>();
-            PostHooks = new List<IPostActionHook>();
-            PostLoadHooks = new List<IPostLoadHook>();
-            ((IObjectContextAdapter)this).ObjectContext.ObjectMaterialized += ObjectMaterialized;
-        }
+            : base() {
+			PreHooks = new List<IPreActionHook>();
+			PostHooks = new List<IPostActionHook>();
+			PostLoadHooks = new List<IPostLoadHook>();
+			ListenToObjectMaterialized();
+		}
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HookedDbContext" /> class, filling <see cref="PreHooks"/> and <see cref="PostHooks"/>.
-        /// </summary>
-        /// <param name="hooks">The hooks.</param>
-        public HookedDbContext(IHook[] hooks)
+		/// <summary>
+		/// Initializes a new instance of the <see cref="HookedDbContext" /> class, filling <see cref="PreHooks"/> and <see cref="PostHooks"/>.
+		/// </summary>
+		/// <param name="hooks">The hooks.</param>
+		public HookedDbContext(IHook[] hooks)
             : base()
         {
             PreHooks = hooks.OfType<IPreActionHook>().ToList();
             PostHooks = hooks.OfType<IPostActionHook>().ToList();
             PostLoadHooks = hooks.OfType<IPostLoadHook>().ToList();
-            ((IObjectContextAdapter)this).ObjectContext.ObjectMaterialized += ObjectMaterialized;
+			ListenToObjectMaterialized();
         }
 
         /// <summary>
@@ -62,7 +61,7 @@ namespace EFHooks
             PostHooks = new List<IPostActionHook>();
 
             PostLoadHooks = new List<IPostLoadHook>();
-            ((IObjectContextAdapter)this).ObjectContext.ObjectMaterialized += ObjectMaterialized;
+			ListenToObjectMaterialized();
         }
 
         /// <summary>
@@ -77,7 +76,7 @@ namespace EFHooks
             PostHooks = hooks.OfType<IPostActionHook>().ToList();
 
             PostLoadHooks = hooks.OfType<IPostLoadHook>().ToList();
-            ((IObjectContextAdapter)this).ObjectContext.ObjectMaterialized += ObjectMaterialized;
+			ListenToObjectMaterialized();
         }
 
         /// <summary>
@@ -238,5 +237,13 @@ namespace EFHooks
                 postLoadHook.HookObject(e.Entity, metadata);
             }
         }
+
+		private void ListenToObjectMaterialized() 
+		{
+			var oc = ((IObjectContextAdapter)this).ObjectContext;
+			if(null != oc)  //When mocking, this will be null
+				oc.ObjectMaterialized += this.ObjectMaterialized;
+		}
+
     }
 }

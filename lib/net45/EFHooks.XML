@@ -26,31 +26,31 @@
         </member>
         <member name="M:EFHooks.HookedDbContext.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext"/> class, initializing empty lists of hooks.
+            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext" /> class, initializing empty lists of hooks.
             </summary>
         </member>
         <member name="M:EFHooks.HookedDbContext.#ctor(EFHooks.IHook[])">
             <summary>
-            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext"/> class, filling <see cref="F:EFHooks.HookedDbContext.PreHooks"/> and <see cref="F:EFHooks.HookedDbContext.PostHooks"/>.
+            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext" /> class, filling <see cref="F:EFHooks.HookedDbContext.PreHooks"/> and <see cref="F:EFHooks.HookedDbContext.PostHooks"/>.
             </summary>
             <param name="hooks">The hooks.</param>
         </member>
         <member name="M:EFHooks.HookedDbContext.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext"/> class, using the specified <paramref name="nameOrConnectionString"/>, initializing empty lists of hooks.
+            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext" /> class, using the specified <paramref name="nameOrConnectionString"/>, initializing empty lists of hooks.
             </summary>
             <param name="nameOrConnectionString">The name or connection string.</param>
         </member>
         <member name="M:EFHooks.HookedDbContext.#ctor(EFHooks.IHook[],System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext"/> class, using the specified <paramref name="nameOrConnectionString"/>, , filling <see cref="F:EFHooks.HookedDbContext.PreHooks"/> and <see cref="F:EFHooks.HookedDbContext.PostHooks"/>.
+            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext" /> class, using the specified <paramref name="nameOrConnectionString"/>, , filling <see cref="F:EFHooks.HookedDbContext.PreHooks"/> and <see cref="F:EFHooks.HookedDbContext.PostHooks"/>.
             </summary>
             <param name="hooks">The hooks.</param>
             <param name="nameOrConnectionString">The name or connection string.</param>
         </member>
         <member name="M:EFHooks.HookedDbContext.#ctor(System.Data.Common.DbConnection,System.Boolean)">
             <summary>
-            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext"/> class using the an existing connection to connect 
+            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext" /> class using the an existing connection to connect 
             to a database. The connection will not be disposed when the context is disposed. (see <see cref="T:System.Data.Entity.DbContext"/> overloaded constructor)
             </summary>
             <param name="existingConnection">An existing connection to use for the new context.</param>
@@ -59,7 +59,7 @@
         </member>
         <member name="M:EFHooks.HookedDbContext.#ctor(EFHooks.IHook[],System.Data.Common.DbConnection,System.Boolean)">
             <summary>
-            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext"/> class using the an existing connection to connect 
+            Initializes a new instance of the <see cref="T:EFHooks.HookedDbContext" /> class using the an existing connection to connect 
             to a database. The connection will not be disposed when the context is disposed. (see <see cref="T:System.Data.Entity.DbContext"/> overloaded constructor)
             </summary>
             <param name="hooks">The hooks.</param>
@@ -93,6 +93,13 @@
             The number of objects written to the underlying database.
             </returns>
         </member>
+        <member name="M:EFHooks.HookedDbContext.HookRunner.ExecutePreActionHooks(System.Collections.Generic.IEnumerable{EFHooks.HookedEntityEntry},System.Boolean)">
+            <summary>
+            Executes the pre action hooks, filtered by <paramref name="requiresValidation"/>.
+            </summary>
+            <param name="modifiedEntries">The modified entries to execute hooks for.</param>
+            <param name="requiresValidation">if set to <c>true</c> executes hooks that require validation, otherwise executes hooks that do NOT require validation.</param>
+        </member>
         <member name="M:EFHooks.HookedDbContext.SaveChangesAsync(System.Threading.CancellationToken)">
             <summary>
             Asynchronously saves all changes made in this context to the underlying database.
@@ -106,13 +113,6 @@
             Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
             that any asynchronous operations have completed before calling another method on this context.
             </remarks>
-        </member>
-        <member name="M:EFHooks.HookedDbContext.HookRunner.ExecutePreActionHooks(System.Collections.Generic.IEnumerable{EFHooks.HookedEntityEntry},System.Boolean)">
-            <summary>
-            Executes the pre action hooks, filtered by <paramref name="requiresValidation"/>.
-            </summary>
-            <param name="modifiedEntries">The modified entries to execute hooks for.</param>
-            <param name="requiresValidation">if set to <c>true</c> executes hooks that require validation, otherwise executes hooks that do NOT require validation.</param>
         </member>
         <member name="P:EFHooks.HookedEntityEntry.PreSaveState">
             <summary>
@@ -129,7 +129,7 @@
         </member>
         <member name="M:EFHooks.HookEntityMetadata.#ctor(System.Data.Entity.EntityState,EFHooks.HookedDbContext)">
             <summary>
-            Initializes a new instance of the <see cref="T:EFHooks.HookEntityMetadata"/> class.
+            Initializes a new instance of the <see cref="T:EFHooks.HookEntityMetadata" /> class.
             </summary>
             <param name="state">The state.</param>
             <param name="context">The optional existing context (I believe this is usable for migrations).</param>
@@ -279,19 +279,6 @@
             </summary>
             <typeparam name="TEntity">The type of entity this hook must watch for.</typeparam>
         </member>
-        <member name="M:EFHooks.PreActionHook`1.Hook(`0,EFHooks.HookEntityMetadata)">
-            <summary>
-            The logic to perform per entity before the registered action gets performed.
-            This gets run once per entity that has been changed.
-            </summary>
-            <param name="entity">The entity that is processed by Entity Framework.</param>
-            <param name="metadata">Metadata about the entity in the context of this hook - such as state.</param>
-        </member>
-        <member name="M:EFHooks.PreActionHook`1.HookObject(System.Object,EFHooks.HookEntityMetadata)">
-            <summary>
-            Implements the interface.  This causes the hook to only run for objects that are assignable to TEntity.
-            </summary>
-        </member>
         <member name="P:EFHooks.PreActionHook`1.RequiresValidation">
             <summary>
             Gets a value indicating whether the hook is only used after successful <typeparamref name="TEntity"/> validation.
@@ -303,6 +290,19 @@
         <member name="P:EFHooks.PreActionHook`1.HookStates">
             <summary>
             Entity States that this hook must be registered to listen for.
+            </summary>
+        </member>
+        <member name="M:EFHooks.PreActionHook`1.Hook(`0,EFHooks.HookEntityMetadata)">
+            <summary>
+            The logic to perform per entity before the registered action gets performed.
+            This gets run once per entity that has been changed.
+            </summary>
+            <param name="entity">The entity that is processed by Entity Framework.</param>
+            <param name="metadata">Metadata about the entity in the context of this hook - such as state.</param>
+        </member>
+        <member name="M:EFHooks.PreActionHook`1.HookObject(System.Object,EFHooks.HookEntityMetadata)">
+            <summary>
+            Implements the interface.  This causes the hook to only run for objects that are assignable to TEntity.
             </summary>
         </member>
         <member name="T:EFHooks.PreDeleteHook`1">

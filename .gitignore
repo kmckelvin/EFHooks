@@ -21,3 +21,4 @@ packages/*/
 /lib/net40/EntityFramework.dll
 /lib/net45/EntityFramework.dll
 /lib/net45/EntityFramework.xml
+*.nupkg_published

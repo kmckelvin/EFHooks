@@ -31,10 +31,7 @@ namespace EFHooks
         /// </summary>
         public HookedDbContext()
             : base() {
-			PreHooks = new List<IPreActionHook>();
-			PostHooks = new List<IPostActionHook>();
-			PostLoadHooks = new List<IPostLoadHook>();
-			ListenToObjectMaterialized();
+			AttachHooks(new IHook[0]);
 		}
 
 		/// <summary>
@@ -44,10 +41,7 @@ namespace EFHooks
 		public HookedDbContext(IHook[] hooks)
             : base()
         {
-            PreHooks = hooks.OfType<IPreActionHook>().ToList();
-            PostHooks = hooks.OfType<IPostActionHook>().ToList();
-            PostLoadHooks = hooks.OfType<IPostLoadHook>().ToList();
-			ListenToObjectMaterialized();
+			AttachHooks(hooks);
         }
 
         /// <summary>
@@ -57,11 +51,7 @@ namespace EFHooks
         public HookedDbContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
-            PreHooks = new List<IPreActionHook>();
-            PostHooks = new List<IPostActionHook>();
-
-            PostLoadHooks = new List<IPostLoadHook>();
-			ListenToObjectMaterialized();
+			AttachHooks(new IHook[0]);
         }
 
         /// <summary>
@@ -72,11 +62,7 @@ namespace EFHooks
         public HookedDbContext(IHook[] hooks, string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
-            PreHooks = hooks.OfType<IPreActionHook>().ToList();
-            PostHooks = hooks.OfType<IPostActionHook>().ToList();
-
-            PostLoadHooks = hooks.OfType<IPostLoadHook>().ToList();
-			ListenToObjectMaterialized();
+			AttachHooks(hooks);
         }
 
         /// <summary>
@@ -89,11 +75,7 @@ namespace EFHooks
         public HookedDbContext(DbConnection existingConnection, bool contextOwnsConnection)
             : base(existingConnection, contextOwnsConnection)
         {
-            PreHooks = new List<IPreActionHook>();
-            PostHooks = new List<IPostActionHook>();
-
-            PostLoadHooks = new List<IPostLoadHook>();
-            ((IObjectContextAdapter)this).ObjectContext.ObjectMaterialized += ObjectMaterialized;
+			AttachHooks(new IHook[0]);
         }
 
         /// <summary>
@@ -105,15 +87,22 @@ namespace EFHooks
         /// <param name="contextOwnsConnection">If set to true the connection is disposed when the context is disposed, otherwise the caller must dispose the connection.</param>
         /// <remarks>Main reason for allowing this, is to enable reusing another database connection. (For instance one that is profiled by Miniprofiler (http://miniprofiler.com/)).</remarks>
         public HookedDbContext(IHook[] hooks, DbConnection existingConnection, bool contextOwnsConnection)
-            : this(existingConnection, contextOwnsConnection)
-        {
-        }
+            : this(existingConnection, contextOwnsConnection) {
+			AttachHooks(hooks);
+		}
 
-        /// <summary>
-        /// Registers a hook to run before a database action occurs.
-        /// </summary>
-        /// <param name="hook">The hook to register.</param>
-        public void RegisterHook(IPreActionHook hook)
+		private void AttachHooks(IHook[] hooks) {
+			PreHooks = hooks.OfType<IPreActionHook>().ToList();
+			PostHooks = hooks.OfType<IPostActionHook>().ToList();
+			PostLoadHooks = hooks.OfType<IPostLoadHook>().ToList();
+			ListenToObjectMaterialized();
+		}
+
+		/// <summary>
+		/// Registers a hook to run before a database action occurs.
+		/// </summary>
+		/// <param name="hook">The hook to register.</param>
+		public void RegisterHook(IPreActionHook hook)
         {
             this.PreHooks.Add(hook);
         }

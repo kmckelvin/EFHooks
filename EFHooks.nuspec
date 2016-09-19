@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Atreyu.EFHooks</id>
-    <version>2.3.1.0</version>
+    <version>2.3.1</version>
     <authors>Damien White (Visoft, Inc.), Robert Sirre, George Mauer, Thomas Haug</authors>
     <owners>visoft, Robert Sirre software development</owners>
     <licenseUrl>https://github.com/Atrejoe/EFHooks/blob/master/LICENSE.txt</licenseUrl>

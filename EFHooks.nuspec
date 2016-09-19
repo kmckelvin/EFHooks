@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Atreyu.EFHooks</id>
+    <version>2.3.0.0</version>
+    <authors>Damien White (Visoft, Inc.), Robert Sirre, George Mauer, Thomas Haug</authors>
+    <owners>visoft, Robert Sirre software development</owners>
+    <licenseUrl>https://github.com/Atrejoe/EFHooks/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/Atrejoe/EFHooks</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>EFHooks simplifies the task of hooking code into EF Code First's extension points and separates concerns to make it easy to unit test your hooking code.</description>
+		<summary>EFHooks simplifies the task of hooking code into EF Code First's extension points and separates concerns to make it easy to unit test your hooking code.
+			This is based on Kevin McKelvin's EFHooks project, but has additional features (added by Visoft), like the ability to use the existing data context within a hook.
+			Metadata validation upon saving is enabled too.</summary>
+    <copyright>Copyright 2015</copyright>
+    <tags>EF EntityFramework Entity Framework Hooks SaveChanges Metadata validation</tags>
+    <dependencies>
+        <dependency id="EntityFramework" version="6.1.0" />
+    </dependencies>
+    </metadata>
+  <files>
+    <file src="lib\net40\EFHooks.dll" target="lib\net40\EFHooks.dll" />
+    <file src="lib\net40\EFHooks.xml" target="lib\net40\EFHooks.xml" />
+    <file src="lib\net45\EFHooks.dll" target="lib\net45\EFHooks.dll" />
+    <file src="lib\net45\EFHooks.xml" target="lib\net45\EFHooks.xml" />
+  </files>
+</package>

@@ -1,4 +1,4 @@
-﻿using System.Data;
+﻿using System.Data.Entity;
 using NUnit.Framework;
 
 namespace EFHooks.Tests.Hooks
@@ -8,6 +8,11 @@ namespace EFHooks.Tests.Hooks
 
         private class SoftDeletePreDeleteHook : PreDeleteHook<ISoftDeleted>
         {
+			public override bool RequiresValidation
+			{
+				get { return true; }
+			}
+
             public override void Hook(ISoftDeleted entity, HookEntityMetadata metadata)
             {
                 metadata.State = EntityState.Modified;

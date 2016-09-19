@@ -48,3 +48,7 @@
 ## 2.3.0.0
 
 * Escaped nullreference exception when referring to `ObjectContext`, which may be null when mocking, as per pull request of George Mauer (@togakangaroo) [https://github.com/Atrejoe/EFHooks/pull/3](https://github.com/Atrejoe/EFHooks/pull/3)
+
+## 2.3.1.0
+
+* Fixes: https://github.com/Atrejoe/EFHooks/pull/4# by George Mauer (@togakangaroo): Overload constructor `HookedDbContext(hooks, existingConnection, contextOwnsConnection)` does not instantiate hooks.
